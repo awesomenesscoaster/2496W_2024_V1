@@ -22,6 +22,6 @@ pros::Motor_Group left({lf, lm, lb});
 pros::Motor_Group right({rf, rm, rb});
 
 pros::Motor firstStage(0, MOTOR_GEARSET_18, false, MOTOR_ENCODER_DEGREES);
-pros::Motor intake(0, MOTOR_GEARSET_18, false, MOTOR_ENCODER_DEGREES);
+pros::Motor intake(11, MOTOR_GEARSET_18, false, MOTOR_ENCODER_DEGREES);
 
 pros::IMU imu(0);
