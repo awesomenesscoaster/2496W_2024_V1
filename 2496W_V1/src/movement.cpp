@@ -8,20 +8,16 @@
 // ------------ Chassis movement functions (PID, arcs, etc....) ------------ //
 
 void driver_move(float lPwr, float rPwr){
-    spin_left(lPwr);
-    spin_right(rPwr);
+    left = lPwr;
+    right = rPwr;
 }
 
 void spin_left(float lPwr){
-    lf.move(lPwr);
-    lm.move(lPwr);
-    lb.move(lPwr);
+    left.move(lPwr);
 }
 
 void spin_right(float rPwr){
-    rf.move(rPwr);
-    rm.move(rPwr);
-    rb.move(rPwr);
+   right.move(rPwr);
 }
 
 void set_brake_coast(){
