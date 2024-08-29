@@ -12,13 +12,16 @@ int abs_sgn(double input) { return input / std::abs(input); }
 void driver() {
 
   // ----------- Driver Graph ---------- //
-  float rPwr, lPwr, rAxis, lAxis;
 
+   
+    
+  double rPwr, lPwr, rAxis, lAxis;
+  
   lAxis = controller.get_analog(ANALOG_LEFT_Y);
   rAxis = controller.get_analog(ANALOG_RIGHT_Y);
 
-  rPwr = rAxis; // math happens here
-  lPwr = lAxis;
+  lPwr = lAxis + rAxis;
+  rPwr = lAxis - rAxis;
 
   driver_move(lPwr, rPwr);
 
@@ -45,5 +48,4 @@ void driver() {
   }
 
 
-  
 }
