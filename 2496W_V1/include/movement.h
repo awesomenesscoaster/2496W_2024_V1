@@ -6,4 +6,12 @@
 void driver_move(float lPwr, float rPwr);
 
 
+void driver_move(float lPwr, float rPwr);
+
+void spin_left(float lPwr);
+
+void spin_right(float rPwr);
+
+void set_brake_coast();
+
 #endif

@@ -5,6 +5,7 @@
 #include "pros/misc.h"
 #include "pros/motors.h"
 #include "robot.h"
+#include "piston.h"
 
 void on_center_button() {}
 
@@ -22,8 +23,15 @@ void competition_initialize() {}
 void autonomous() {}
 
 void opcontrol() {
-  while (true) {
+  long long time = 0;
+  set_brake_coast();
+
+  while (true) 
+  {
+
     driver();
-    pros::delay(10);
+    
+    pros::delay(2);
+    time += 2;
   }
 }

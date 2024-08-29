@@ -6,6 +6,7 @@
 #include "pros/imu.hpp"
 #include "pros/misc.hpp"
 #include "pros/motors.hpp"
+#include "piston.h"
 
 extern pros::Controller controller;
 
@@ -23,5 +24,10 @@ extern pros::Motor first_stage;
 extern pros::Motor intake;
 
 extern pros::IMU imu;
+extern Piston CLAMP;
+extern Piston TILTP;
+extern Piston INTAKEP;
+extern Piston LIFTP; 
+
 
 #endif

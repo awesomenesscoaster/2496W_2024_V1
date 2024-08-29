@@ -5,6 +5,7 @@
 #include "pros/misc.hpp"
 #include "pros/motors.h"
 #include "pros/motors.hpp"
+#include "piston.h"
 
 // -------- All electronic definitions -------- //
 
@@ -25,3 +26,11 @@ pros::Motor first_stage(11, MOTOR_GEARSET_18, true, MOTOR_ENCODER_DEGREES);
 pros::Motor intake(2, MOTOR_GEARSET_18, false, MOTOR_ENCODER_DEGREES);
 
 pros::IMU imu(0);
+
+//tank 1
+Piston ClampP(CLAMP); // one piston, 1 solenoid for clamp
+Piston TiltP(TILTP); // two pistons, 1 solenoid for tilt
+
+//tank 2
+Piston IntakeP(INTAKEP); // tbd (prob 1 piston, 1 solenoid)
+Piston LiftP(LIFTP); 
