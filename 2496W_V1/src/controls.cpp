@@ -12,9 +12,7 @@ int abs_sgn(double input) { return input / std::abs(input); }
 void driver() {
 
   // ----------- Driver Graph ---------- //
-
-   
-    
+  
   double rPwr, lPwr, rAxis, lAxis;
   
   lAxis = controller.get_analog(ANALOG_LEFT_Y);
