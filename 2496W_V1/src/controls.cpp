@@ -24,11 +24,26 @@ void driver() {
 
   // ----------- Intake --------- //
 
-  if (controller.get_digital(DIGITAL_R1)) {
+  if (controller.get_digital(DIGITAL_L1)){
     intake.move(127);
-  } else if (controller.get_digital(DIGITAL_R2)) {
+  } 
+  else if (controller.get_digital(DIGITAL_L2)){
     intake.move(-127);
-  } else {
+  } 
+  else{
     intake.move(0);
   }
+
+  if (controller.get_digital(DIGITAL_R1)){
+    first_stage.move(127);
+  } 
+  else if (controller.get_digital(DIGITAL_R2)){
+    first_stage.move(-127);
+  } 
+  else{
+    first_stage.move(0);
+  }
+
+
+  
 }
