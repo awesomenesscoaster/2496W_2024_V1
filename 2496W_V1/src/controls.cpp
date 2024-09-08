@@ -28,6 +28,7 @@ void driver() {
 
   static bool vtoggle_forward = false;
   static bool vtoggle_reverse = false;
+  static bool vtoggle_stop = false;
   
   if(not controller.get_digital(DIGITAL_DOWN)){
     if(controller.get_digital_new_press(DIGITAL_L1)){ 
@@ -36,8 +37,14 @@ void driver() {
             vtoggle_forward = true;
             vtoggle_reverse = false;
         }
-        else{
-            vtoggle_forward = true;
+        else if (!vtoggle_forward){
+           vtoggle_forward = true;
+          
+        }
+        else if (vtoggle_forward){
+          vtoggle_forward = false;
+          vtoggle_reverse = false;
+          vtoggle_stop = true;
         }
     }
     if(controller.get_digital_new_press(DIGITAL_L2)){
@@ -45,8 +52,14 @@ void driver() {
             vtoggle_reverse = true;
             vtoggle_forward = false;
         }
-        else{
-            vtoggle_reverse = true;
+        else if (!vtoggle_reverse){
+           vtoggle_reverse = true;
+          
+        }
+        else if (vtoggle_reverse){
+            vtoggle_forward = false;
+            vtoggle_reverse = false;
+            vtoggle_stop = true;
         }    
     }
     
@@ -63,6 +76,9 @@ void driver() {
   }
   else if (vtoggle_reverse){
       intake.move(-127);
+  }
+  else if (vtoggle_stop){
+      intake.move(0);
   }
   else{
       intake.move(0);

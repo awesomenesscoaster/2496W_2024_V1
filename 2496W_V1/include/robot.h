@@ -24,10 +24,7 @@ extern pros::Motor first_stage;
 extern pros::Motor intake;
 
 extern pros::IMU imu;
-extern Piston CLAMP;
-extern Piston TILTP;
-extern Piston INTAKEP;
-extern Piston LIFTP; 
+
 
 
 #endif
