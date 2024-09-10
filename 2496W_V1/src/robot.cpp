@@ -12,12 +12,12 @@
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
 pros::Motor lf(0, MOTOR_GEARSET_06, true, MOTOR_ENCODER_DEGREES);
-pros::Motor lm(0, MOTOR_GEARSET_06, true, MOTOR_ENCODER_DEGREES);
-pros::Motor lb(0, MOTOR_GEARSET_06, true, MOTOR_ENCODER_DEGREES);
+pros::Motor lm(5, MOTOR_GEARSET_06, true, MOTOR_ENCODER_DEGREES);
+pros::Motor lb(15, MOTOR_GEARSET_06, true, MOTOR_ENCODER_DEGREES);
 
-pros::Motor rf(0, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
-pros::Motor rm(0, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
-pros::Motor rb(0, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
+pros::Motor rf(6, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
+pros::Motor rm(20, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
+pros::Motor rb(14, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
 
 pros::Motor_Group left({lf, lm, lb});
 pros::Motor_Group right({rf, rm, rb});
