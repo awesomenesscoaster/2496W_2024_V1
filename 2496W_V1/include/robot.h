@@ -23,7 +23,11 @@ extern pros::Motor_Group right;
 extern pros::Motor first_stage;
 extern pros::Motor intake;
 
+extern pros::Motor lift;
+
 extern pros::IMU imu;
+
+extern pros::Rotation rotation;
 
 
 
