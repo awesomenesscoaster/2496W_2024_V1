@@ -31,14 +31,13 @@ void driver() {
   static bool vtoggle_stop = false;
   
   if(not controller.get_digital(DIGITAL_DOWN)){
-    if(controller.get_digital_new_press(DIGITAL_L1)){ 
-        
+    if(controller.get_digital_new_press(DIGITAL_DOWN)){ 
         if (vtoggle_reverse){
-            vtoggle_forward = true;
-            vtoggle_reverse = false;
+          vtoggle_forward = true;
+          vtoggle_reverse = false;
         }
         else if (!vtoggle_forward){
-           vtoggle_forward = true;
+          vtoggle_forward = true;
           
         }
         else if (vtoggle_forward){
@@ -47,19 +46,19 @@ void driver() {
           vtoggle_stop = true;
         }
     }
-    if(controller.get_digital_new_press(DIGITAL_L2)){
+    if(controller.get_digital_new_press(DIGITAL_B)){
         if (vtoggle_forward){
-            vtoggle_reverse = true;
-            vtoggle_forward = false;
+          vtoggle_reverse = true;
+          vtoggle_forward = false;
         }
         else if (!vtoggle_reverse){
-           vtoggle_reverse = true;
+          vtoggle_reverse = true;
           
         }
         else if (vtoggle_reverse){
-            vtoggle_forward = false;
-            vtoggle_reverse = false;
-            vtoggle_stop = true;
+          vtoggle_forward = false;
+          vtoggle_reverse = false;
+          vtoggle_stop = true;
         }    
     }
     
@@ -72,16 +71,16 @@ void driver() {
   // ----------- Vertical Intake Speed Con --------- //
 
   if (vtoggle_forward){
-      intake.move(127);
+    intake.move(127);
   }
   else if (vtoggle_reverse){
-      intake.move(-127);
+    intake.move(-90);
   }
   else if (vtoggle_stop){
-      intake.move(0);
+    intake.move(0);
   }
   else{
-      intake.move(0);
+    intake.move(0);
   }
   
   // ----------- First Stage Intake Con --------- //
@@ -95,6 +94,59 @@ void driver() {
   else{
     first_stage.move(0);
   }
+  // ----------- Lift Con --------- //
 
+  if (controller.get_digital(DIGITAL_L1)){
+    lift.move(127);
+  } 
+  else if (controller.get_digital(DIGITAL_L2)){
+    lift.move(-127);
+  } 
+  else{
+    lift.move(0);
+  }
+
+  // ----------- Piston Con --------- //
+
+  static bool clampState = false;
+  if (controller.get_digital_new_press(DIGITAL_Y)){
+    clampState = !clampState;
+    clampP.set_value(clampState);
+  }
+
+  static bool tiltState = true;
+  if (controller.get_digital_new_press(DIGITAL_RIGHT)){
+    tiltState = !tiltState;
+    tiltP.set_value(tiltState);
+  }
+
+  // ----------- Incorporate with Scuffs --------- //
+
+  static bool liftState = false;
+  if (controller.get_digital_new_press(DIGITAL_X)){
+    liftState = !liftState;
+    liftP.set_value(liftState);
+  }
+
+  static bool intakeState = true;
+  if (controller.get_digital_new_press(DIGITAL_LEFT)){
+    intakeState = !intakeState;
+    intakeP.set_value(intakeState);
+  }
 
 }
+
+  
+void rotation_val(int time){
+
+  // ----------- Rotation Get Value --------- //
+
+  if (time % 2 == 0){
+    
+    int lift_pos = rotation.get_position();
+    controller.print(0, 0, "Lift pos: %d", lift_pos);
+  
+  }
+  
+}
+

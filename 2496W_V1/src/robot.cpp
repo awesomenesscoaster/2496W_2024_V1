@@ -15,7 +15,7 @@ pros::Motor lf(3, MOTOR_GEARSET_06, true, MOTOR_ENCODER_DEGREES);
 pros::Motor lm(11, MOTOR_GEARSET_06, true, MOTOR_ENCODER_DEGREES);
 pros::Motor lb(14, MOTOR_GEARSET_06, true, MOTOR_ENCODER_DEGREES);
 
-pros::Motor rf(9, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
+pros::Motor rf(7, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
 pros::Motor rm(17, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
 pros::Motor rb(19, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
 
@@ -30,6 +30,11 @@ pros::Motor lift(9, MOTOR_GEARSET_18, false, MOTOR_ENCODER_DEGREES);
 pros::IMU imu(20);
 
 pros::Rotation rotation(6);
+
+pros::ADIDigitalOut clampP (1, false);
+pros::ADIDigitalOut tiltP (2, true);
+pros::ADIDigitalOut liftP (3, false);
+pros::ADIDigitalOut intakeP (4, true); 
 
 //tank 1
 // Piston ClampP(CLAMP); // one piston, 1 solenoid for clamp
