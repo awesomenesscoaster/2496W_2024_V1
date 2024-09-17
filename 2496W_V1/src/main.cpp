@@ -29,7 +29,6 @@ void opcontrol() {
   controller.clear();
   rotation.reset_position();
 
-  if (controller.get_digital_new_press(DIGITAL_RIGHT))
   while (true) 
   {
     

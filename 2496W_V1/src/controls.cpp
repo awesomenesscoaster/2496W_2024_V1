@@ -30,43 +30,39 @@ void driver() {
   static bool vtoggle_reverse = false;
   static bool vtoggle_stop = false;
   
-  if(not controller.get_digital(DIGITAL_DOWN)){
-    if(controller.get_digital_new_press(DIGITAL_DOWN)){ 
-        if (vtoggle_reverse){
-          vtoggle_forward = true;
-          vtoggle_reverse = false;
-        }
-        else if (!vtoggle_forward){
-          vtoggle_forward = true;
-          
-        }
-        else if (vtoggle_forward){
-          vtoggle_forward = false;
-          vtoggle_reverse = false;
-          vtoggle_stop = true;
-        }
-    }
-    if(controller.get_digital_new_press(DIGITAL_B)){
-        if (vtoggle_forward){
-          vtoggle_reverse = true;
-          vtoggle_forward = false;
-        }
-        else if (!vtoggle_reverse){
-          vtoggle_reverse = true;
-          
-        }
-        else if (vtoggle_reverse){
-          vtoggle_forward = false;
-          vtoggle_reverse = false;
-          vtoggle_stop = true;
-        }    
-    }
-    
+  
+  if(controller.get_digital_new_press(DIGITAL_DOWN)){ 
+      if (vtoggle_reverse){
+        vtoggle_forward = true;
+        vtoggle_reverse = false;
+      }
+      else if (!vtoggle_forward){
+        vtoggle_forward = true;
+        
+      }
+      else if (vtoggle_forward){
+        vtoggle_forward = false;
+        vtoggle_reverse = false;
+        vtoggle_stop = true;
+      }
   }
-  else{
-    // shift key whatever 
+  if(controller.get_digital_new_press(DIGITAL_B)){
+      if (vtoggle_forward){
+        vtoggle_reverse = true;
+        vtoggle_forward = false;
+      }
+      else if (!vtoggle_reverse){
+        vtoggle_reverse = true;
+        
+      }
+      else if (vtoggle_reverse){
+        vtoggle_forward = false;
+        vtoggle_reverse = false;
+        vtoggle_stop = true;
+      }    
+  }
+  
 
-  }
 
   // ----------- Vertical Intake Speed Con --------- //
 
@@ -114,7 +110,7 @@ void driver() {
     clampP.set_value(clampState);
   }
 
-  static bool tiltState = true;
+  static bool tiltState = false;
   if (controller.get_digital_new_press(DIGITAL_RIGHT)){
     tiltState = !tiltState;
     tiltP.set_value(tiltState);

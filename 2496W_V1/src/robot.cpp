@@ -32,7 +32,7 @@ pros::IMU imu(20);
 pros::Rotation rotation(6);
 
 pros::ADIDigitalOut clampP (1, false);
-pros::ADIDigitalOut tiltP (2, true);
+pros::ADIDigitalOut tiltP (2, false);
 pros::ADIDigitalOut liftP (3, false);
 pros::ADIDigitalOut intakeP (4, true); 
 
