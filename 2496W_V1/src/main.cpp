@@ -35,9 +35,9 @@ void opcontrol() {
   
   while (true) 
   {
-    controller.print(1, 0, "Temps: %f, %f", round(intake.get_temperature()), round(first_stage.get_temperature()));
-    if (time%2 == 0){ 
-      controller.print(2, 0, "Chassis Temp: %f", round(chassis_temp));
+    controller.print(1, 0, "Temps: %f  , %f  ", round(intake.get_temperature()), round(first_stage.get_temperature()));
+    if (time % 2 == 0 && time % 4 != 0){ 
+      controller.print(2, 0, "Chassis Temp: %f  ", round(chassis_temp));
     }
     
     driver();

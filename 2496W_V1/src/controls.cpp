@@ -137,7 +137,7 @@ void rotation_val(int time){
 
   // ----------- Rotation Get Value --------- //
 
-  if (time % 2 == 0){
+  if (time % 4 == 0){
     
     int lift_pos = rotation.get_position();
     controller.print(0, 0, "Lift pos: %d", lift_pos);
