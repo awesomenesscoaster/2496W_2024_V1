@@ -1,6 +1,7 @@
 #include "display/lv_misc/lv_task.h"
 #include "main.h"
 #include "robot.h"
+#include "movement.h"
 #include <cmath>
 #include <math.h>
 #include <vector>
