@@ -3,6 +3,12 @@
 #include "main.h"
 #include "robot.h"
 
+struct pidConstants{
+    float p;
+    float i;
+    float d;
+};
+
 void driver_move(float lPwr, float rPwr);
 
 
