@@ -32,16 +32,19 @@ void opcontrol() {
   
   controller.clear();
   rotation.reset_position();
+  int counter = 0;
   
   while (true) 
   {
-    controller.print(1, 0, "Temps: %f  , %f  ", round(intake.get_temperature()), round(first_stage.get_temperature()));
-    if (time % 2 == 0 && time % 4 != 0){ 
-      controller.print(2, 0, "Chassis Temp: %f  ", round(chassis_temp));
+    if (!(counter % 25)) {
+    controller.print(1, 0, "Temps: %d , %d ", int(intake.get_temperature()), int(first_stage.get_temperature()));
+    controller.print(2, 0, "Chassis Temp: %f  ", round(chassis_temp));
     }
+    counter++;
+    
     
     driver();
-    rotation_val(time);    
+    //rotation_val(time);    
     pros::delay(2);
     time += 2;
     // if(intake.get_temperature() >= 50) {
