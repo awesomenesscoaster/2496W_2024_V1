@@ -6,6 +6,9 @@
 #include "pros/motors.h"
 #include "robot.h"
 #include "piston.h"
+#include <cmath>
+#include <iostream>
+
 using namespace std;
 
 void on_center_button() {}
@@ -23,25 +26,33 @@ void competition_initialize() {}
 
 void autonomous() {}
 
+double truncate2(double var){
+  return std::trunc(var * 100)/100;
+}
+
 void opcontrol() {
   long long time = 0; 
-  //ik theres a better way to do this 😿
-  double chassis_temp = (lf.get_temperature() + lm.get_temperature() + lb.get_temperature() + rf.get_temperature() + rm.get_temperature() + rb.get_temperature()) / 6;
-
   set_brake_coast();
   
   controller.clear();
   rotation.reset_position();
   int counter = 0;
   
-  while (true) 
+  while (true)
   {
-    if (!(counter % 25)) {
-    controller.print(1, 0, "Temps: %d , %d ", int(intake.get_temperature()), int(first_stage.get_temperature()));
-    controller.print(2, 0, "Chassis Temp: %f  ", round(chassis_temp));
+    double chassis_temp = (lf.get_temperature() + lm.get_temperature() + lb.get_temperature() + rf.get_temperature() + rm.get_temperature() + rb.get_temperature()) / 6;
+    int lift_pos = rotation.get_position();
+
+    if (counter % 50 == 0 && counter % 100 != 0 && counter % 150 != 0) {
+      controller.print(0, 0, "Temps: %d , %d          ", int(intake.get_temperature()), int(first_stage.get_temperature()));
+    }
+    else if (counter % 100 == 0 && counter % 150 != 0){
+      controller.print(1, 0, "Chassis: %f   ", float(chassis_temp));
+    }
+    else if (counter % 150 == 0){
+      controller.print(2, 0, "Lift pos: %d", lift_pos);
     }
     counter++;
-    
     
     driver();
     //rotation_val(time);    
