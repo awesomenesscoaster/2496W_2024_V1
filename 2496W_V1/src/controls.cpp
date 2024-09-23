@@ -28,16 +28,18 @@ void driver() {
 
   static bool vtoggle_forward = false;
   static bool vtoggle_reverse = false;
-  static bool vtoggle_stop = false;
+  static bool vtoggle_stop = true;
   
   
   if(controller.get_digital_new_press(DIGITAL_DOWN)){ 
       if (vtoggle_reverse){
         vtoggle_forward = true;
         vtoggle_reverse = false;
+        vtoggle_stop = false; 
       }
       else if (!vtoggle_forward){
         vtoggle_forward = true;
+        vtoggle_stop = false; 
         
       }
       else if (vtoggle_forward){
@@ -50,9 +52,11 @@ void driver() {
       if (vtoggle_forward){
         vtoggle_reverse = true;
         vtoggle_forward = false;
+        vtoggle_stop = false; 
       }
       else if (!vtoggle_reverse){
         vtoggle_reverse = true;
+        vtoggle_stop = false; 
         
       }
       else if (vtoggle_reverse){
@@ -70,7 +74,7 @@ void driver() {
     intake.move(127);
   }
   else if (vtoggle_reverse){
-    intake.move(-127);
+    intake.move(-80);
   }
   else if (vtoggle_stop){
     intake.move(0);
@@ -81,9 +85,15 @@ void driver() {
   
   // ----------- First Stage Intake Con --------- //
 
-  if (controller.get_digital(DIGITAL_R1)){
+  if (controller.get_digital(DIGITAL_R1) and vtoggle_reverse and not vtoggle_stop){
+    first_stage.move(60);
+  } 
+  else if (controller.get_digital(DIGITAL_R1) and vtoggle_forward and not vtoggle_stop){
     first_stage.move(127);
   } 
+  else if (controller.get_digital(DIGITAL_R1) and vtoggle_stop){
+    first_stage.move(127);
+  }
   else if (controller.get_digital(DIGITAL_R2)){
     first_stage.move(-127);
   } 
