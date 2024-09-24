@@ -26,17 +26,22 @@ void competition_initialize() {}
 
 void autonomous() {}
 
-double truncate2(double var){
-  return std::trunc(var * 100)/100;
-}
+// double truncate2(double var){
+//   return std::trunc(var * 100)/100;
+// }
 
 void opcontrol() {
-  long long time = 0; 
+  long long time = 0;
+  int counter = 0; 
+
+  // brake types
   set_brake_coast();
+  lift.set_brake_mode(MOTOR_BRAKE_HOLD);
+  intake.set_brake_mode(MOTOR_BRAKE_COAST);
+  first_stage.set_brake_mode(MOTOR_BRAKE_COAST);
   
   controller.clear();
   rotation.reset_position();
-  int counter = 0;
   
   while (true)
   {
