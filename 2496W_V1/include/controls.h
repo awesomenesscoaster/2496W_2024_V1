@@ -3,7 +3,7 @@
 
 void driver();
 
-void rotation_val(int time);
+
 
 
 #endif

@@ -60,7 +60,6 @@ void opcontrol() {
     counter++;
     
     driver();
-    //rotation_val(time);    
     pros::delay(2);
     time += 2;
     // if(intake.get_temperature() >= 50) {
