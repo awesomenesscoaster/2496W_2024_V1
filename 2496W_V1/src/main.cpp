@@ -3,7 +3,9 @@
 #include "controls.h"
 #include "movement.h"
 #include "pros/misc.h"
+#include "auton_obj.h"
 #include "pros/motors.h"
+
 #include "robot.h"
 #include "piston.h"
 #include <cmath>
@@ -11,9 +13,18 @@
 
 using namespace std;
 
+Auton *auton;
+string names;
+
+
 void on_center_button() {}
 
-void initialize() { }
+void initialize() { 
+  controller.clear();
+	static Auton temp = auton_selector(autons);
+	names = temp.get_name();
+	auton = &temp;
+}
 
 /**
  * Runs while the robot is in the disabled state of Field Management System or
@@ -24,7 +35,9 @@ void disabled() {}
 
 void competition_initialize() {}
 
-void autonomous() {}
+void autonomous() {
+  (*auton).run();
+}
 
 // double truncate2(double var){
 //   return std::trunc(var * 100)/100;
@@ -58,6 +71,10 @@ void opcontrol() {
       controller.print(2, 0, "Lift pos: %d", lift_pos);
     }
     counter++;
+
+    if(controller.get_digital_new_press(E_CONTROLLER_DIGITAL_RIGHT)){
+		  autonomous();
+		}
     
     driver();
     pros::delay(2);

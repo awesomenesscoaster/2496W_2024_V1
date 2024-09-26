@@ -6,6 +6,11 @@
 #include "robot.h"
 #include "piston.h"
 
+
+#include "auton_obj.h"
+#include <iostream>
+#include <cmath>
+
 // ------- Everything that occurs during driver control (Driver controls)  ---------- //
 
 int abs_sgn(double input) { return input / std::abs(input); }
@@ -128,10 +133,10 @@ void driver() {
 
   // ----------- Incorporate with Scuffs --------- //
 
-  static bool liftState = false;
+  static bool hangState = false;
   if (controller.get_digital_new_press(DIGITAL_X)){
-    liftState = !liftState;
-    liftP.set_value(liftState);
+    hangState = !hangState;
+    hangP.set_value(hangState);
   }
 
   static bool intakeState = true;
@@ -140,6 +145,50 @@ void driver() {
     intakeP.set_value(intakeState);
   }
 
+  if (controller.get_digital_new_press(DIGITAL_UP)){
+    // some control for macro lift to top
+  }
+
+}
+
+Auton auton_selector(std::vector<Auton> autons)
+{
+  short int selected = 0;
+  int timer = 0;
+
+  while(true)
+  {
+      if(!controller.get_digital(pros::E_CONTROLLER_DIGITAL_A))
+      {
+          if(timer % 50 == 0 && timer % 100 != 0) 
+              controller.print(0, 0, "Select: %s         ", autons.at(selected).get_name());
+          if(timer % 100 == 0) 
+              controller.print(1, 0, "%s            ", autons.at(selected).get_d());
+          if(controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT) && selected > 0)
+              selected--;
+          if(controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT) && selected < autons.size()-1)
+              selected++;
+      }
+      else
+      {
+          pros::delay(50);
+          controller.clear();
+          pros::delay(50);
+          controller.print(0, 0, "selected:         "); 
+          pros::delay(50);
+          //glb::con.print(0, 0, "Selected           ");   
+          controller.print(1, 0, "auton: %s         ", autons.at(selected).get_name());   
+          pros::delay(50);
+          //glb::con.print(0, 0, "Selected           ");   
+          controller.print(2, 0, "%s             ", autons.at(selected).get_d()); 
+          pros::delay(800);
+          controller.clear();
+          return autons.at(selected);
+      }
+
+      pros::delay(1);
+      timer++;
+  }
 }
 
 

@@ -31,7 +31,7 @@ extern pros::Rotation rotation;
 
 extern pros::ADIDigitalOut clampP;
 extern pros::ADIDigitalOut tiltP;
-extern pros::ADIDigitalOut liftP;
+extern pros::ADIDigitalOut hangP;
 extern pros::ADIDigitalOut intakeP;
 
 
