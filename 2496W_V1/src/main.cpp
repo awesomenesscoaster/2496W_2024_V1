@@ -20,10 +20,10 @@ string names;
 void on_center_button() {}
 
 void initialize() { 
-  controller.clear();
-	static Auton temp = auton_selector(autons);
-	names = temp.get_name();
-	auton = &temp;
+  // controller.clear();
+	// static Auton temp = auton_selector(autons);
+	// names = temp.get_name();
+	// auton = &temp;
 }
 
 /**

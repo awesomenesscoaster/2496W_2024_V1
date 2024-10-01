@@ -91,7 +91,7 @@ void driver() {
   // ----------- First Stage Intake Con --------- //
 
   if (controller.get_digital(DIGITAL_R1) and vtoggle_reverse and not vtoggle_stop){
-    first_stage.move(60);
+    first_stage.move(70);
   } 
   else if (controller.get_digital(DIGITAL_R1) and vtoggle_forward and not vtoggle_stop){
     first_stage.move(127);
