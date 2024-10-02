@@ -11,7 +11,7 @@
 
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
-pros::Motor lf(6, MOTOR_GEARSET_06, true, MOTOR_ENCODER_DEGREES);
+pros::Motor lf(8, MOTOR_GEARSET_06, true, MOTOR_ENCODER_DEGREES);
 pros::Motor lm(7, MOTOR_GEARSET_06, true, MOTOR_ENCODER_DEGREES);
 pros::Motor lb(17, MOTOR_GEARSET_06, true, MOTOR_ENCODER_DEGREES);
 
