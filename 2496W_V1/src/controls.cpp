@@ -79,7 +79,7 @@ void driver() {
     intake.move(127);
   }
   else if (vtoggle_reverse){
-    intake.move(-95);
+    intake.move(-98);
   }
   else if (vtoggle_stop){
     intake.move(0);
@@ -145,10 +145,6 @@ void driver() {
     intakeP.set_value(intakeState);
   }
 
-  if (controller.get_digital_new_press(DIGITAL_UP)){
-    // some control for macro lift to top
-  }
-
 }
 
 Auton auton_selector(std::vector<Auton> autons)
@@ -190,5 +186,3 @@ Auton auton_selector(std::vector<Auton> autons)
       timer++;
   }
 }
-
-

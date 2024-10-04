@@ -28,18 +28,9 @@ pros::Motor intake(10, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
 pros::Motor lift(11, MOTOR_GEARSET_18, false, MOTOR_ENCODER_DEGREES);
 
 pros::IMU imu(5);
-
 pros::Rotation rotation(6);
 
 pros::ADIDigitalOut clampP (1, false);
 pros::ADIDigitalOut tiltP (2, false);
 pros::ADIDigitalOut hangP (3, false);
 pros::ADIDigitalOut intakeP (4, true); 
-
-//tank 1
-// Piston ClampP(CLAMP); // one piston, 1 solenoid for clamp
-// Piston TiltP(TILTP); // two pistons, 1 solenoid for tilt
-
-// //tank 2
-// Piston IntakeP(INTAKEP); // tbd (prob 1 piston, 1 solenoid)
-// Piston LiftP(LIFTP); 
