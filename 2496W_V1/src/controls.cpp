@@ -79,7 +79,7 @@ void driver() {
     intake.move(127);
   }
   else if (vtoggle_reverse){
-    intake.move(-98);
+    intake.move(-100);
   }
   else if (vtoggle_stop){
     intake.move(0);
