@@ -3,7 +3,6 @@
 
 void driver();
 
-Auton auton_selector(std::vector<Auton> autons); 
 
 
 #endif

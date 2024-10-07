@@ -18,4 +18,11 @@ using namespace std;
 
 extern std::vector<Auton> autons;
 
+extern void far_left();
+
+extern void close_right();
+
+extern Auton auton_selector(std::vector<Auton> autons); 
+
+
 #endif
