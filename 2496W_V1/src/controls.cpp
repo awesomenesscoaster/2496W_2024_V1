@@ -105,6 +105,14 @@ void driver() {
     lift.move(0);
   }
 
+  if (abs(intake.get_actual_velocity()) < 5 and (vtoggle_forward == true or vtoggle_reverse == true)){
+    controller.rumble("......");
+    vtoggle_forward = false;
+    vtoggle_reverse = false;
+    vtoggle_stop = true;
+  }
+
+
   // ----------- Piston Con --------- //
 
   static bool clampState = false;
