@@ -70,7 +70,7 @@ void opcontrol() {
     }
     else if (counter % 150 == 0){
       //controller.print(2, 0, "Lift pos: %d", lift_pos);
-      controller.print(2, 0, "Temps: %d , %d          ", int(intake.get_temperature()), int(first_stage.get_temperature()));
+      controller.print(2, 0, "Temps: %d , %d, %d          ", int(intake.get_temperature()), int(first_stage.get_temperature()), float(chassis_temp));
 
     }
     counter++;

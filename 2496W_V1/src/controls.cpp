@@ -121,12 +121,6 @@ void driver() {
 
   // ----------- Incorporate with Scuffs --------- //
 
-  static bool hangState = false;
-  if (controller.get_digital_new_press(DIGITAL_X)) {
-    hangState = !hangState;
-    hangP.set_value(hangState);
-  }
-
   static bool intakeState = true;
   if (controller.get_digital_new_press(DIGITAL_LEFT)) {
     intakeState = !intakeState;
