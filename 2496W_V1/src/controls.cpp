@@ -11,7 +11,6 @@
 #include <iostream>
 
 // ------- Everything that occurs during driver control (Driver controls)
-// ---------- //
 
 int abs_sgn(double input) { return input / std::abs(input); }
 
@@ -104,14 +103,18 @@ void driver() {
   } else {
     lift.move(0);
   }
+  // static int jam_delay = 0;
+  // if (jam_delay == 0 and abs(intake.get_actual_velocity()) < 5 and (vtoggle_forward == true or vtoggle_reverse == true)){
+  //   controller.rumble("......");
+  //   vtoggle_forward = false;
+  //   vtoggle_reverse = false;
+  //   vtoggle_stop = true;
+  //   jam_delay = 5000;
+  // }
 
-  if (abs(intake.get_actual_velocity()) < 5 and (vtoggle_forward == true or vtoggle_reverse == true)){
-    controller.rumble("......");
-    vtoggle_forward = false;
-    vtoggle_reverse = false;
-    vtoggle_stop = true;
-  }
-
+  // if (jam_delay > 0){
+  //   jam_delay -= 2;
+  // }
 
   // ----------- Piston Con --------- //
 

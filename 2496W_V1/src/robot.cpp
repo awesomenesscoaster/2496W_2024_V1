@@ -25,7 +25,7 @@ pros::Motor_Group right({rf, rm, rb});
 pros::Motor first_stage(3, MOTOR_GEARSET_18, true, MOTOR_ENCODER_DEGREES);
 pros::Motor intake(10, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
 
-pros::Motor lift(11, MOTOR_GEARSET_18, false, MOTOR_ENCODER_DEGREES);
+pros::Motor lift(11, MOTOR_GEARSET_18, true, MOTOR_ENCODER_DEGREES);
 
 pros::IMU imu(5);
 pros::Rotation rotation(6);
