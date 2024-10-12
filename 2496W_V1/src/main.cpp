@@ -65,12 +65,12 @@ void opcontrol() {
       controller.print(0, 0, "R: %d , %d, %d          ", int(rf.get_actual_velocity()), int(rm.get_actual_velocity()), int(rb.get_actual_velocity()));
     }
     else if (counter % 100 == 0 && counter % 150 != 0){
-      //controller.print(1, 0, "Chassis: %f   ", float(chassis_temp));
-      controller.print(1, 0, "L: %d , %d, %d          ", int(lf.get_actual_velocity()), int(lm.get_actual_velocity()), int(lb.get_actual_velocity()));
+      controller.print(1, 0, "Chassis: %f   ", float(chassis_temp));
+      //controller.print(1, 0, "L: %d , %d, %d          ", int(lf.get_actual_velocity()), int(lm.get_actual_velocity()), int(lb.get_actual_velocity()));
     }
     else if (counter % 150 == 0){
       //controller.print(2, 0, "Lift pos: %d", lift_pos);
-      controller.print(2, 0, "Temps: %d , %d, %d          ", int(intake.get_temperature()), int(first_stage.get_temperature()), float(chassis_temp));
+      controller.print(2, 0, "Temps: %d , %d, %d          ", int(intake.get_temperature()), int(first_stage.get_temperature()));
 
     }
     counter++;
