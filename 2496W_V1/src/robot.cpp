@@ -1,11 +1,12 @@
 #include "robot.h"
+#include "piston.h"
 #include "pros/adi.hpp"
 #include "pros/imu.hpp"
 #include "pros/misc.h"
 #include "pros/misc.hpp"
 #include "pros/motors.h"
 #include "pros/motors.hpp"
-#include "piston.h"
+
 
 // -------- All electronic definitions -------- //
 
@@ -28,8 +29,9 @@ pros::Motor intake(10, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
 pros::Motor lift(11, MOTOR_GEARSET_18, true, MOTOR_ENCODER_DEGREES);
 
 pros::IMU imu(5);
-pros::Rotation rotation(6);
 
-pros::ADIDigitalOut clampP (1, false);
-pros::ADIDigitalOut tiltP (2, false);
-pros::ADIDigitalOut intakeP (3, true); 
+pros::ADIPotentiometer rotation(4);
+
+pros::ADIDigitalOut clampP(1, false);
+pros::ADIDigitalOut tiltP(2, false);
+pros::ADIDigitalOut intakeP(3, false);

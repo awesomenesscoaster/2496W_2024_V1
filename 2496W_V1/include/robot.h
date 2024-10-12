@@ -27,7 +27,7 @@ extern pros::Motor lift;
 
 extern pros::IMU imu;
 
-extern pros::Rotation rotation;
+extern pros::ADIPotentiometer rotation;
 
 extern pros::ADIDigitalOut clampP;
 extern pros::ADIDigitalOut tiltP;

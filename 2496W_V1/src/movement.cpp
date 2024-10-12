@@ -50,7 +50,7 @@ float calc (float target, float input, float integralKI, int maxI) {
 
 void driver_move(float lPwr, float rPwr){
     left = lPwr;
-    //right = rPwr;
+    right = rPwr;
 }
 
 void spin_left(float lPwr){

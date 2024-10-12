@@ -38,7 +38,7 @@ Auton auton_selector(std::vector<Auton> autons) {
     //   if (timer % 100 == 0){
     //     controller.print(1, 0, "%s            ", autons.at(selected).get_d());
     //   }
-      if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT) & selected > 0){
+      if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT) && selected > 0){
         selected--;
       }
       if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT) && selected < autons.size() - 1){

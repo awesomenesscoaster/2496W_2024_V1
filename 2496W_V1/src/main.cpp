@@ -53,12 +53,11 @@ void opcontrol() {
   first_stage.set_brake_mode(MOTOR_BRAKE_COAST);
   
   controller.clear();
-  rotation.reset_position();
   
   while (true)
   {
     double chassis_temp = (lf.get_temperature() + lm.get_temperature() + lb.get_temperature() + rf.get_temperature() + rm.get_temperature() + rb.get_temperature()) / 6;
-    int lift_pos = rotation.get_position();
+    int lift_pos = rotation.get_value();
 
     if (counter % 50 == 0 && counter % 100 != 0 && counter % 150 != 0) {
       //controller.print(0, 0, "Temps: %d , %d          ", int(intake.get_temperature()), int(first_stage.get_temperature()));
