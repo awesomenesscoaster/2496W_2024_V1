@@ -5,6 +5,7 @@
 #include "pros/misc.h"
 #include "pros/motors.h"
 #include "robot.h"
+#include "util.h"
 
 #include "auton_obj.h"
 #include <cmath>
@@ -180,8 +181,24 @@ void driver() {
     intakeP.set_value(intakeState);
   }
 
+  Timer timer;
+  static bool lift_safe = false;
+  int counter = 0;
   if (controller.get_digital_new_press(DIGITAL_X)) {
-    liftMacro();
-    intakeP.set_value(false);
+    if (!lift_safe) {
+      lift_safe = true;
+    } else {
+      timer.startTime();
+      while (timer.getTime() < 640) {
+        lift.move(75);
+        if (timer.getTime() > 250 && counter < 1) {
+          intakeState = !intakeState;
+          intakeP.set_value(intakeState);
+          counter++;
+        }
+      }
+      lift.move(0);
+      lift_safe = false;
+    }
   }
 }
