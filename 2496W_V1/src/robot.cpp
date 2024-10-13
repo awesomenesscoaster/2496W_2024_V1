@@ -7,7 +7,6 @@
 #include "pros/motors.h"
 #include "pros/motors.hpp"
 
-
 // -------- All electronic definitions -------- //
 
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
