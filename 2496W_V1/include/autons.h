@@ -22,6 +22,20 @@ extern void far_left();
 
 extern void close_right();
 
+extern void far_left();
+
+extern void close_right(); 
+
+extern void close_left();
+
+extern void far_right();
+
+extern void AWP_red();
+
+extern void AWP_blue();
+
+extern void blank() {};
+
 extern Auton auton_selector(std::vector<Auton> autons); 
 
 

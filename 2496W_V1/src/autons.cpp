@@ -12,11 +12,41 @@ void far_left() {
   spin_right(0);
 }
 
-void close_right() { rf.move(100); }
+void close_right() { 
+  rf.move(100); 
+}
 
-std::vector<Auton> autons{Auton("far left", far_left, "none"),
-                          Auton("close right", close_right, "none")
+void close_left() {
+  spin_right(127);
+  pros::delay(100);
+  spin_right(0);
+}
 
+void far_right() { 
+  rf.move(100); 
+}
+
+void AWP_red(){
+
+}
+
+void AWP_blue(){
+
+}
+
+void blank() {}
+
+
+
+std::vector<Auton> autons{
+  Auton("No Auton", blank, ""),
+  Auton("far left", far_left, "done"),
+  Auton("close left", close_left, "done"),
+  Auton("far right", far_right, "done"),
+  Auton("close right", close_right, "done"),
+  Auton("red awp", AWP_red, "tune"),
+  Auton("blue awp", AWP_blue, "test")
+  
 };
 
 Auton auton_selector(std::vector<Auton> autons) {
