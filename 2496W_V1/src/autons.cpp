@@ -9,8 +9,15 @@ using namespace pid;
 
 void far_left() {
  // alice do pid here
-  drive(100);
-  // turn_to(90);
+  drive(60);
+  /*turn_to(90);
+  pros::delay(500);
+  turn_to(45);
+  pros::delay(500);
+  turn_to(15);
+  pros::delay(500);
+  turn_to(5);
+  */
 }
 
 void close_right() { 

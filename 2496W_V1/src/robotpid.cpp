@@ -24,12 +24,14 @@ namespace pid{
 
     void drive(double target_dist, int timeout=2000, double mult=1.0, double max_speed=127, pros::ADIDigitalOut pis = blankP, int piston_time = 0, int piston_open_time = 0, int exit_time=100)
     {
-        double drive_kp = 4.62646 * std::pow(fabs(target_dist), -0.689989) + 0.107432; 
+        //double drive_kp = 4.62646 //* std::pow(fabs(target_dist), -0.689989) + 0.107432; 
+        target_dist = target_dist / 10;
+        double drive_kp = 10;
         //NEW:
         // 4.62646 * std::pow(fabs(target_dist), -0.689989) + 0.107432 for 0
         // 2.04035 * std::pow(fabs(target_dist), -0.534162) + 0.0949831 for 2.5
         
-        double drive_ki = 0.002;
+        double drive_ki = 0;
         double drive_kd = 0; //0 for good
 
         double imu_k = 0.003;
@@ -107,6 +109,7 @@ namespace pid{
                 else
                     error_range_time++;
                 if (exit_time <= error_range_time)
+                
                     break;
             }
             
@@ -268,6 +271,8 @@ namespace pid{
 
             spin_left(speed);
             spin_right(-speed);
+
+           print_info_auton(time, error, speed); 
 
 
             pros::delay(10);
