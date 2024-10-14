@@ -3,6 +3,7 @@
 #include "piston.h"
 #include "robot.h"
 #include "controls.h"
+#include "robotpid.h"
 using namespace pid;
 // ---------- All autonomous routes --------- //f
 
