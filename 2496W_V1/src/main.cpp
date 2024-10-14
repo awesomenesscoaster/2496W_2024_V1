@@ -60,7 +60,7 @@ void opcontrol() {
          rf.get_temperature() + rm.get_temperature() + rb.get_temperature()) /
         6;
     int lift_pos = rotation.get_value();
-    print_info(counter, chassis_temp);
+    // print_info(counter, chassis_temp);
     counter++;
 
     if (controller.get_digital_new_press(E_CONTROLLER_DIGITAL_UP)) {
