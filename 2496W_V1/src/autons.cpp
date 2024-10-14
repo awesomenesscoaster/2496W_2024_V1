@@ -2,14 +2,14 @@
 #include "movement.h"
 #include "piston.h"
 #include "robot.h"
-
-
+#include "controls.h"
+using namespace pid;
 // ---------- All autonomous routes --------- //f
 
 void far_left() {
-  spin_right(127);
-  pros::delay(100);
-  spin_right(0);
+ // alice do pid here
+  drive(1000);
+  // turn_to(90);
 }
 
 void close_right() { 
@@ -45,8 +45,8 @@ void blank() {}
 
 
 std::vector<Auton> autons{
-  Auton("No Auton", blank, ""),
   Auton("far left", far_left, "done"),
+  Auton("No Auton", blank, ""),
   Auton("close left", close_left, "done"),
   Auton("far right", far_right, "done"),
   Auton("close right", close_right, "done"),

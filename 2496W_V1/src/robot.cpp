@@ -34,3 +34,4 @@ pros::ADIPotentiometer rotation(4);
 pros::ADIDigitalOut clampP(1, false);
 pros::ADIDigitalOut tiltP(2, false);
 pros::ADIDigitalOut intakeP(3, false);
+pros::ADIDigitalOut blankP(6, false);

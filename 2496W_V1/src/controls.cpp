@@ -54,6 +54,36 @@ int abs_sgn(double input) { return input / std::abs(input); }
 //     pros::delay(10);
 //   }
 // }
+
+void print_info_auton(int time, double error, double speed)
+{
+    if(time % 50 == 0 && time%2000 != 0) 
+        controller.print(0, 0, "Error: %.2f : %.2f    ", error, speed);
+    if(time % 100 == 0 && time % 150 != 0 && time%2000 != 0) 
+        controller.print(1, 0, "%.2f : %.2f          ", imu.get_heading());
+    if(time % 150 == 0 && time % 100 != 0 && time % 150 != 0 && time%2000 != 0) 
+        controller.print(2, 0, "%.2f | %.0f       ", error, time);
+}
+
+void print_info(int counter, float chassis_temp){
+  if (counter % 50 == 0 && counter % 100 != 0 && counter % 150 != 0) {
+      // controller.print(0, 0, "Temps: %d , %d          ",
+      // int(intake.get_temperature()), int(first_stage.get_temperature()));
+      controller.print(
+          0, 0, "R: %d , %d, %d          ", int(rf.get_actual_velocity()),
+          int(rm.get_actual_velocity()), int(rb.get_actual_velocity()));
+  } else if (counter % 100 == 0 && counter % 150 != 0) {
+    controller.print(1, 0, "Chassis: %f   ", float(chassis_temp));
+    // controller.print(1, 0, "L: %d , %d, %d          ",
+    // int(lf.get_actual_velocity()), int(lm.get_actual_velocity()),
+    // int(lb.get_actual_velocity()));
+  } else if (counter % 150 == 0) {
+    // controller.print(2, 0, "Lift pos: %d", lift_pos);
+    controller.print(2, 0, "Temps: %d , %d, %d          ",
+                      int(intake.get_temperature()),
+                      int(first_stage.get_temperature()));
+  }
+}
 void driver() {
 
   // ----------- Driver Graph ---------- //

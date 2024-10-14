@@ -32,6 +32,7 @@ extern pros::ADIPotentiometer rotation;
 extern pros::ADIDigitalOut clampP;
 extern pros::ADIDigitalOut tiltP;
 extern pros::ADIDigitalOut intakeP;
+extern pros::ADIDigitalOut blankP;
 
 
 
