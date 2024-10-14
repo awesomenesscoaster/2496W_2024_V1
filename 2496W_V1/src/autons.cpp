@@ -9,7 +9,7 @@ using namespace pid;
 
 void far_left() {
  // alice do pid here
-  drive(1000);
+  drive(100);
   // turn_to(90);
 }
 
