@@ -13,7 +13,13 @@ void far_left() {
 }
 
 void close_right() { 
-  rf.move(100); 
+  driver_move(-80, -80);
+  pros::delay(800);
+  driver_move(-15, -15);
+  tiltP.set_value(true);
+  pros::delay(200);
+  driver_move(0, 0);
+
 }
 
 void close_left() {

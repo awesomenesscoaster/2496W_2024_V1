@@ -34,7 +34,7 @@ extern void AWP_red();
 
 extern void AWP_blue();
 
-extern void blank() {};
+extern void blank();
 
 extern Auton auton_selector(std::vector<Auton> autons); 
 
