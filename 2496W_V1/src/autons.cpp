@@ -6,18 +6,26 @@
 #include "robotpid.h"
 using namespace pid;
 // ---------- All autonomous routes --------- //f
-
+using namespace pros;
 void far_left() {
  // alice do pid here
-  drive(60);
-  /*turn_to(90);
+  // drive(100);
+  // delay(100);
+  // drive(1500);
+  turn_to(90);
   pros::delay(500);
   turn_to(45);
   pros::delay(500);
   turn_to(15);
   pros::delay(500);
-  turn_to(5);
-  */
+  turn_to(0);
+  delay(500);
+  turn_to(105);
+  delay(500);
+  turn_to(180);
+  delay(500);
+  turn_to(150);
+  
 }
 
 void close_right() { 

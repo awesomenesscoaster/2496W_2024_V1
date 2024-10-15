@@ -24,15 +24,15 @@ namespace pid{
 
     void drive(double target_dist, int timeout=2000, double mult=1.0, double max_speed=127, pros::ADIDigitalOut pis = blankP, int piston_time = 0, int piston_open_time = 0, int exit_time=100)
     {
-        //double drive_kp = 4.62646 //* std::pow(fabs(target_dist), -0.689989) + 0.107432; 
-        target_dist = target_dist / 10;
-        double drive_kp = 10;
+        double drive_kp = 5.62646 * std::pow(fabs(target_dist), -0.689989) + 0.11812; 
+
+        //double drive_kp = 5;
         //NEW:
         // 4.62646 * std::pow(fabs(target_dist), -0.689989) + 0.107432 for 0
         // 2.04035 * std::pow(fabs(target_dist), -0.534162) + 0.0949831 for 2.5
         
-        double drive_ki = 0;
-        double drive_kd = 0; //0 for good
+        double drive_ki = 0.00049;
+        double drive_kd = 0.00935; //0 for good
 
         double imu_k = 0.003;
         // this changed nothing lmao 
@@ -72,7 +72,7 @@ namespace pid{
             else if (time>piston_time) pis.set_value(true);
 
             prev_error = error;
-            
+            chas_pos = (lf.get_position() + lm.get_position() + lb.get_position() + rf.get_position() + rm.get_position() + rb.get_position()) / 6;
             //P
             error = target - chas_pos;
             //I
@@ -182,9 +182,9 @@ namespace pid{
             TURN_KD = 0.33; 
         }
         if (fabs(target_deg) < 65){
-            TURN_KP = 4.5; 
-            TURN_KI = 0.36; 
-            TURN_KD = 0.26; 
+            TURN_KP = 4.28; 
+            TURN_KI = 0.37; 
+            TURN_KD = 0.32; 
         }
 
         int starting;
