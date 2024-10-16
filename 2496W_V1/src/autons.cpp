@@ -11,20 +11,20 @@ void far_left() {
  // alice do pid here
   // drive(100);
   // delay(100);
-  // drive(1500);
-  turn_to(90);
-  pros::delay(500);
-  turn_to(45);
-  pros::delay(500);
-  turn_to(15);
-  pros::delay(500);
-  turn_to(0);
-  delay(500);
-  turn_to(105);
-  delay(500);
-  turn_to(180);
-  delay(500);
-  turn_to(150);
+  drive(1500);
+  // turn_to(90);
+  // pros::delay(500);
+  // turn_to(45);
+  // pros::delay(500);
+  // turn_to(15);
+  // pros::delay(500);
+  // turn_to(0);
+  // delay(500);
+  // turn_to(105);
+  // delay(500);
+  // turn_to(180);
+  // delay(500);
+  // turn_to(150);
   
 }
 

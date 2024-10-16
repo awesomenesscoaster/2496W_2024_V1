@@ -145,7 +145,7 @@ void driver() {
   if (vtoggle_forward) {
     intake.move(127);
   } else if (vtoggle_reverse) {
-    intake.move(-85);
+    intake.move(-75);
   } else if (vtoggle_stop) {
     intake.move(0);
   } else {
@@ -154,11 +154,10 @@ void driver() {
 
   // ----------- First Stage Intake Con --------- //
 
-  if (controller.get_digital(DIGITAL_R1) and vtoggle_reverse and
-      not vtoggle_stop) {
-    first_stage.move(85);
-  } else if (controller.get_digital(DIGITAL_R1) and vtoggle_forward and
-             not vtoggle_stop) {
+  if (controller.get_digital(DIGITAL_R1) and vtoggle_reverse and not vtoggle_stop){
+    first_stage.move(75);
+  }
+  else if (controller.get_digital(DIGITAL_R1) and vtoggle_forward and not vtoggle_stop) {
     first_stage.move(127);
   } else if (controller.get_digital(DIGITAL_R1) and vtoggle_stop) {
     first_stage.move(127);

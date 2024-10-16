@@ -24,17 +24,17 @@ namespace pid{
 
     void drive(double target_dist, int timeout=2000, double mult=1.0, double max_speed=127, pros::ADIDigitalOut pis = blankP, int piston_time = 0, int piston_open_time = 0, int exit_time=100)
     {
-        double drive_kp = 5.62646 * std::pow(fabs(target_dist), -0.689989) + 0.11812; 
+        double drive_kp = 4.62646 * std::pow(fabs(target_dist), -0.689989) + 0.7; 
 
         //double drive_kp = 5;
         //NEW:
         // 4.62646 * std::pow(fabs(target_dist), -0.689989) + 0.107432 for 0
         // 2.04035 * std::pow(fabs(target_dist), -0.534162) + 0.0949831 for 2.5
         
-        double drive_ki = 0.00049;
-        double drive_kd = 0.00935; //0 for good
+        double drive_ki = 0; // 0.00049
+        double drive_kd = 0.0005; //0 for good
 
-        double imu_k = 0.003;
+        double imu_k = 2;
         // this changed nothing lmao 
 
         if (fabs(end_head) - fabs(imu.get_heading()) > 1) {
