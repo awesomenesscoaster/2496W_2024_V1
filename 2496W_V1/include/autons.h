@@ -18,6 +18,10 @@ using namespace std;
 
 extern std::vector<Auton> autons;
 
+extern void flipout();
+
+extern void rush_blue_left();
+
 extern void far_left();
 
 extern void close_right();

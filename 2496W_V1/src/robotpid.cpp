@@ -4,6 +4,7 @@
 #include "controls.h"
 #include "piston.h"
 #include <cmath>
+#include "util.h"
 #include <math.h>
 #include <vector>
 
@@ -22,125 +23,220 @@ namespace pid{
     double rCount = 0;
     
 
-    void drive(double target_dist, int timeout=2000, double mult=1.0, double max_speed=127, pros::ADIDigitalOut pis = blankP, int piston_time = 0, int piston_open_time = 0, int exit_time=100)
+    // void drive(double target_dist, int timeout=2000, double mult=1.0, double max_speed=127, pros::ADIDigitalOut pis = blankP, int piston_time = 0, int piston_open_time = 0, int exit_time=100)
+    // {
+    //     double drive_kp = 4.62646 * std::pow(fabs(target_dist), -0.689989) + 0.7; 
+
+    //     //double drive_kp = 5;
+    //     //NEW:
+    //     // 4.62646 * std::pow(fabs(target_dist), -0.689989) + 0.107432 for 0
+    //     // 2.04035 * std::pow(fabs(target_dist), -0.534162) + 0.0949831 for 2.5
+
+    //     double drive_ki = 0; // 0.00049
+    //     double drive_kd = 0.0005; //0 for good
+    //     double imu_k = 2;
+    //     // this changed nothing lmao 
+
+    //     if (fabs(end_head) - fabs(imu.get_heading()) > 1) {
+    //         start_head += end_head-imu.get_heading();
+    //     }
+
+    //     int starting = 180;
+    //     start_head -= starting;
+    //     imu.set_heading(starting);
+    //     lf.tare_position();
+    //     lm.tare_position();
+    //     lb.tare_position();
+    //     rf.tare_position();
+    //     rm.tare_position();
+    //     rb.tare_position();
+    //     double chas_pos = (lm.get_position() + rm.get_position()) / 2;
+    //     //Set Variables
+    //     double target = target_dist + chas_pos;
+    //     double error = target - chas_pos;
+    //     double prev_error;
+    //     double integral = 0;
+    //     double kintegral = 0;
+    //     double derivative = 0;
+    //     double init_heading = imu.get_heading();
+    //     double heading_error = 0;
+    //     double error_range_time = 0;
+    //     bool start_positive = target_dist >= 0 ? true : false;
+
+    //     bool exit = false;
+    //     bool same_error = false;
+
+    //     int scaler = 100;
+    //     int time = 0;
+    //     pis.set_value(false);
+
+    //     int piston_on_time = piston_time + piston_open_time;
+
+    //     while (time < timeout)
+    //     {
+    //         if (time>piston_on_time) pis.set_value(false);
+    //         else if (time>piston_time) pis.set_value(true);
+
+    //         prev_error = error;
+    //         chas_pos = (lm.get_position() + rm.get_position()) / 2;
+    //         //P
+    //         error = target - chas_pos;
+    //         //I
+    //         if(fabs(error)<30) {
+    //             integral += error;
+    //         }
+    //         //D
+    //         derivative = (error - prev_error) * 1000;
+
+    //         //Correct sides, ensure heading stays same as beginning
+    //         heading_error = init_heading - imu.get_heading();
+
+    //         //PID
+    //         double speed = mult * (error * drive_kp + integral * drive_ki + derivative * drive_kd);
+
+    //         //Heading correction
+    //         kintegral += heading_error;
+
+    //         double correction = (kintegral * imu_k);
+
+    //         //Cap speed and correction sum to max
+    //         if (fabs(speed) + fabs(correction) > max_speed) 
+    //         {
+    //             double multiplier = max_speed/(fabs(speed) + fabs(correction));
+    //             speed *= multiplier;
+    //             correction *= multiplier;
+    //         }
+
+    //         //Exit Loop
+    //         if (fabs(error) < 6) 
+    //         {
+    //             if(!exit)
+    //                 exit = true;
+    //             else
+    //                 error_range_time++;
+    //             if (exit_time <= error_range_time)
+            
+    //                 break;
+    //         }
+        
+
+    //         //Keep sides moving the same distances
+    //         // chas.spin_left(speed + correction * speed / 127.0);
+    //         // chas.spin_right(speed - correction * speed / 127.0);
+    //         spin_left(speed);
+    //         spin_right(speed);
+
+    //         //Logging
+    //         print_info_auton(time, error, speed);
+        
+    //         //Prevent infinite loops
+    //         pros::delay(1);
+    //         time++;
+    //     }
+    //     spin_left(0);
+    //     spin_right(0);
+    //     double diff = imu.get_heading() - starting;
+    //     if (fabs(diff)>2) {
+    //         start_head+=diff;
+    //     }
+
+    //     end_head = imu.get_heading();
+
+    //     global_heading += imu.get_heading() - starting;
+
+    //     //pis.set(false);
+    // }
+
+     void drive(double target_dist, int timeout=2000, double mult=1.0, double max_speed=127, pros::ADIDigitalOut pis = blankP, int piston_time = 0, int piston_open_time = 0, int exit_time=100)
     {
-        double drive_kp = 4.62646 * std::pow(fabs(target_dist), -0.689989) + 0.7; 
+
+        lf.tare_position();
+        lm.tare_position();
+        lb.tare_position();
+        rf.tare_position();
+        rm.tare_position();
+        rb.tare_position();
+        
+        float encoder_average;
+        float voltage;
+        float curr_pos = 0;
+        int count = 0;
+        int printTimer = 0;
+        float imuInit = imu.get_heading();
+        float heading;
+        double maxI = 200;
+        double error = 0;
+
+        double prev_error;
+        double integral = 0;
+        double kintegral = 0;
+        double derivative = 0;
+        
+        double error_range_time = 0;
+
+
+        double drive_kp = 4.62646 * std::pow(fabs(target_dist), -0.689989) + 0.22; 
 
         //double drive_kp = 5;
         //NEW:
         // 4.62646 * std::pow(fabs(target_dist), -0.689989) + 0.107432 for 0
         // 2.04035 * std::pow(fabs(target_dist), -0.534162) + 0.0949831 for 2.5
-        
-        double drive_ki = 0; // 0.00049
-        double drive_kd = 0.0005; //0 for good
 
-        double imu_k = 2;
-        // this changed nothing lmao 
+        double drive_ki = 0.053; // 0.00049
+        double drive_kd = 2.8; //0 for good
+        imuInit = imu.get_rotation();
 
-        if (fabs(end_head) - fabs(imu.get_heading()) > 1) {
-            start_head += end_head-imu.get_heading();
-        }
+        Timer t2000;
+        while (true) {
+            encoder_average = (lb.get_position() + rb.get_position()) / 2;
 
-        int starting = 180;
-        start_head -= starting;
-        imu.set_heading(starting);
-        double chas_pos = (lf.get_position() + lm.get_position() + lb.get_position() + rf.get_position() + rm.get_position() + rb.get_position()) / 6;
-        //Set Variables
-        double target = target_dist + chas_pos;
-        double error = target - chas_pos;
-        double prev_error;
-        double integral = 0;
-        double kintegral = 0;
-        double derivative = 0;
-        double init_heading = imu.get_heading();
-        double heading_error = 0;
-        double error_range_time = 0;
-        bool start_positive = target_dist >= 0 ? true : false;
+            // if (t2000.getTime()>piston_time) pis.set_value(false);
+            // else if (t2000.getTime()>(piston_open_time + piston_time)) pis.set_value(true);
 
-        bool exit = false;
-        bool same_error = false;
-
-        int scaler = 100;
-        int time = 0;
-        pis.set_value(false);
-
-        int piston_on_time = piston_time + piston_open_time;
-
-        while (time < timeout)
-        {
-            if (time>piston_on_time) pis.set_value(false);
-            else if (time>piston_time) pis.set_value(true);
-
+            heading = imuInit - imu.get_rotation();
+            heading = heading*5;
+            
             prev_error = error;
-            chas_pos = (lf.get_position() + lm.get_position() + lb.get_position() + rf.get_position() + rm.get_position() + rb.get_position()) / 6;
-            //P
-            error = target - chas_pos;
-            //I
+            error = target_dist - encoder_average;
+
+            derivative = error - prev_error;
+
             if(fabs(error)<30) {
                 integral += error;
             }
-            //D
-            derivative = (error - prev_error) * 1000;
 
-            //Correct sides, ensure heading stays same as beginning
-            heading_error = init_heading - imu.get_heading();
+            if (integral > 0) {
+            integral = std::min(integral, maxI);
+            } else {
+            integral = std::max(integral, -maxI);
+            }
 
-            //PID
             double speed = mult * (error * drive_kp + integral * drive_ki + derivative * drive_kd);
-
-            //Heading correction
-            kintegral += heading_error;
-
-            double correction = (kintegral * imu_k);
-
-            //Cap speed and correction sum to max
-            if (fabs(speed) + fabs(correction) > max_speed) 
-            {
-                double multiplier = max_speed/(fabs(speed) + fabs(correction));
-                speed *= multiplier;
-                correction *= multiplier;
+            
+            if (fabs(speed) > max_speed) {
+                speed = max_speed * speed / std::abs(speed);
             }
 
-            //Exit Loop
-            if (fabs(error) < 6) 
-            {
-                if(!exit)
-                    exit = true;
-                else
-                    error_range_time++;
-                if (exit_time <= error_range_time)
-                
-                    break;
+            print_info_auton(t2000.getTime(), error, speed);
+
+            spin_left(speed + heading);
+            spin_right(speed - heading);
+
+            if(t2000.getTime() > timeout){
+                break;
             }
-            
 
-            //Keep sides moving the same distances
-            // chas.spin_left(speed + correction * speed / 127.0);
-            // chas.spin_right(speed - correction * speed / 127.0);
-            spin_left(speed);
-            spin_right(speed);
-
-            //Logging
-            print_info_auton(time, error, speed);
-            
-            //Prevent infinite loops
-            pros::delay(1);
-            time++;
+            if (std::abs(target_dist - encoder_average) <= 0.8) {
+            count++;
+            }
+            if (count >= 10) {
+            break;
+            }
+            pros::delay(10);
         }
         spin_left(0);
         spin_right(0);
-        double diff = imu.get_heading() - starting;
-        if (fabs(diff)>2) {
-            start_head+=diff;
         }
-        
-        end_head = imu.get_heading();
-
-        global_heading += imu.get_heading() - starting;
-
-        //pis.set(false);
-    }
-
 
     
     double turn_f(double error)

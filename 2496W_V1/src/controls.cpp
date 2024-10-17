@@ -192,13 +192,13 @@ void driver() {
   // ----------- Piston Con --------- //
 
   static bool clampState = false;
-  if (controller.get_digital_new_press(DIGITAL_Y)) {
+  if (controller.get_digital_new_press(DIGITAL_RIGHT)) {
     clampState = !clampState;
     clampP.set_value(clampState);
   }
 
   static bool tiltState = false;
-  if (controller.get_digital_new_press(DIGITAL_RIGHT)) {
+  if (controller.get_digital_new_press(DIGITAL_Y)) {
     tiltState = !tiltState;
     tiltP.set_value(tiltState);
   }
@@ -219,7 +219,7 @@ void driver() {
       lift_safe = true;
     } else {
       timer.startTime();
-      while (timer.getTime() < 640) {
+      while (timer.getTime() < 600) {
         lift.move(75);
         if (timer.getTime() > 250 && counter < 1) {
           intakeState = !intakeState;
