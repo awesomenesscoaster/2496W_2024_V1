@@ -93,70 +93,32 @@ void rush_blue_left(){
 
 }
 
-void far_left() {
- // alice do pid here
-  // drive(100);
-  // delay(100);
-  drive(1000, 4000);
-  // delay(200);
-  // drive(1000);
-  // turn_to(90);
-  // pros::delay(500);
-  // turn_to(45);
-  // pros::delay(500);
-  // turn_to(15);
-  // pros::delay(500);
-  // turn_to(0);
-  // delay(500);
-  // turn_to(105);
-  // delay(500);
-  // turn_to(180);
-  // delay(500);
-  // turn_to(150);
+void rush_red_right() {
+
   
 }
 
-void close_right() { 
-  driver_move(-80, -80);
-  pros::delay(800);
-  driver_move(-15, -15);
-  tiltP.set_value(true);
-  pros::delay(200);
-  driver_move(0, 0);
+void awp_blue_right(){
 
-}
+} 
 
-void close_left() {
-  spin_right(127);
-  pros::delay(100);
-  spin_right(0);
-}
+void awp_red_left(){
+  
+} 
 
-void far_right() { 
-  rf.move(100); 
-}
 
-void AWP_red(){
-
-}
-
-void AWP_blue(){
-
-}
 
 void blank() {}
 
 
 
 std::vector<Auton> autons{
-  Auton("blue rush left", rush_blue_left, ""),
-  Auton("far left", far_left, "done"),
-  Auton("No Auton", blank, ""),
-  Auton("close left", close_left, "done"),
-  Auton("far right", far_right, "done"),
-  Auton("close right", close_right, "done"),
-  Auton("red awp", AWP_red, "tune"),
-  Auton("blue awp", AWP_blue, "test")
+  Auton("blue rush left", rush_blue_left, "tune"),
+  Auton("red rush right", rush_red_right, "create"),
+  Auton("blue awp right", awp_blue_right, "create"),
+  Auton("red awp left", awp_red_left, "create"),
+  Auton("No Auton", blank, "")
+
   
 };
 
