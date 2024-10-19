@@ -25,7 +25,7 @@ extern void rush_red_right();
 extern void awp_blue_right();
 extern void awp_red_left();
 extern void blank();
-
+extern void skills();
 extern Auton auton_selector(std::vector<Auton> autons); 
 
 

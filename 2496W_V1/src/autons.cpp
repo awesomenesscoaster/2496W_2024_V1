@@ -23,70 +23,84 @@ void flipout(){
 }
 
 void rush_blue_left(){
-  drive(-1700, 800);
-  lift.move(35);
-  turn_to(31, 450);
+  drive(-1730, 850);
+  lift.move(30);
+  turn_to(33.5, 450);
   lift.move(0);
-  drive(-450, 500, 1, 60);
-  intakeP.set_value(true);
-  drive(-150, 200, 1, 22);
+  drive(-395, 600, 1, 60);
+  drive(-75, 300, 1, 30);
+
+  
   clampP.set_value(true);
-  delay(150);
-  
-  drive(300, 300);
-  lift.move(-40);
-  
+  intakeP.set_value(true);
+  delay(25);
+
+  drive(200, 300);
   tiltP.set_value(true);
+
+  
   delay(100);
-  turn_to(-62, 1000);
+  turn_to(-20, 800);
+  turn_to(-49, 800);
+
+  intake.move(-40);
+  first_stage.move(-127);
+  lift.move(-50);
+  delay(100);
   lift.move(0);
+  delay(300);
   intake.move(127);
   first_stage.move(127);
-  drive(400, 1000, 1, 70);
-  delay(100);
-  first_stage.move(-127);
+  drive(100, 50, 2);
+
+  delay(300);
+  drive(400, 500, 1, 70);
+
+  delay(300);
   turn_to(-135, 700);
-  drive(-425, 900);
-  intake.move(0);
+  drive(-432, 900);
+  intake.move(-50);
+  delay(50);
   tiltP.set_value(false);
   clampP.set_value(false);
+  delay(65);
+  intake.move(0);
   
+  turn_to(93.5, 750);
+  intake.move(0);
   delay(200);
-  turn_to(90.5, 750);
-  delay(600);
+  
   drive(-1000, 800, 1);
+  
   drive(-200, 800, 1, 30);
   clampP.set_value(true);
-  delay(350);
+  delay(50);
   tiltP.set_value(true);
-  delay(50);
-  lift.move(45);
-  turn_to(-44, 700);
+  delay(300);
+  lift.move(25);
+  turn_to(-65, 1000);
   intake.move(0);
-  delay(10);
   intakeP.set_value(false);
-  delay(50);
+  delay(250);
   lift.move(0);
-  drive(1235, 800);
-  delay(200);
+  drive(1235, 1000, 1, 80);
   
   intakeP.set_value(true);
-  delay(300);
+  delay(250);
   first_stage.move(127);
+  delay(75);
   intake.move(127);
-  delay(800);
-  drive(-200);
-  pros::delay(200);
-  first_stage.move(-127);  
-  turn_to(52, 1000);
-  first_stage.move(127);
-  intake.move(127);
-  drive(1700, 1000);
-  drive(-1000, 1000);
+  delay(200);
+  drive(-200, 300);
+  
+  // turn_to(52, 400);
+  // drive(1200, 1000);
+  // drive(-1200, 1000);
+
   turn_to(-135, 1000);
-  drive(1000, 800);
 
-
+  drive(500, 1000);
+  intake.move(0);
   
   // first_stage.move(-127);
   // pros::delay(5000);
@@ -95,7 +109,7 @@ void rush_blue_left(){
 
 void rush_red_right() {
 
-  
+
 }
 
 void awp_blue_right(){
@@ -106,6 +120,55 @@ void awp_red_left(){
   
 } 
 
+void skills(){
+  //Flipout + 1st Ring
+  lift.move(35);
+  drive(-250, 800, 1, 20);
+  lift.move(0);
+  clampP.set_value(true);
+  pros::delay(200);
+  drive(180, 200);
+  tiltP.set_value(true);
+  first_stage.move(127);
+  pros::delay(700);
+  turn_to(-56.5, 800);
+  intakeP.set_value(true);
+  pros::delay(200);
+  intake.move(127);
+  pros::delay(900);
+  intake.move(-75);
+  pros::delay(150);
+  intake.move(127);
+  pros::delay(200);
+  drive(650, 950, 1, 60);
+  pros::delay(1000);
+  intake.move(0);
+
+  //3 + 4
+  intakeP.set_value(false);
+  turn_to(-152, 800);
+  lift.move(-65);
+  pros::delay(400);
+  lift.move(0);
+  intakeP.set_value(true);
+  pros::delay(200);
+  intake.move(127);
+  pros::delay(200);
+  drive(500, 500, 1.7);
+  pros::delay(400);
+  turn_to(170, 800);
+  drive(1350, 900);
+  pros::delay(400);
+  turn_to(-58, 800);
+  lift.move(60);
+  pros::delay(150);
+  lift.move(0);
+  drive(1500, 1000, 1.5);
+  pros::delay(400);
+  turn_to(20, 800);
+  drive(2000, 1200);
+
+}
 
 
 void blank() {}
@@ -117,6 +180,7 @@ std::vector<Auton> autons{
   Auton("red rush right", rush_red_right, "create"),
   Auton("blue awp right", awp_blue_right, "create"),
   Auton("red awp left", awp_red_left, "create"),
+  Auton("skills", skills, "create"),
   Auton("No Auton", blank, "")
 
   

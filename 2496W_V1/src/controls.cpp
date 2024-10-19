@@ -57,35 +57,41 @@ int abs_sgn(double input) { return input / std::abs(input); }
 
 void print_info_auton(int time, double error, double speed)
 {
-    if(time % 50 == 0 && time%2000 != 0) 
-        controller.print(0, 0, "Error: %.2f : %.2f    ", error, speed);
-    if(time % 100 == 0 && time % 150 != 0 && time%2000 != 0) 
-        controller.print(1, 0, "%.2f : %.2f          ", imu.get_heading());
-    if(time % 150 == 0 && time % 100 != 0 && time % 150 != 0 && time%2000 != 0) 
-        controller.print(2, 0, "%.2f | %.0f       ", error, time);
+  if (time % 50 == 0 && time % 2000 != 0)
+    controller.print(0, 0, "Error: %.2f : %.2f    ", error, speed);
+  if (time % 100 == 0 && time % 150 != 0 && time % 2000 != 0)
+    controller.print(1, 0, "%.2f : %.2f          ", imu.get_heading());
+  if (time % 150 == 0 && time % 100 != 0 && time % 150 != 0 && time % 2000 != 0)
+    controller.print(2, 0, "%.2f | %.0f       ", error, time);
 }
 
-void print_info(int counter, float chassis_temp){
-  if (counter % 50 == 0 && counter % 100 != 0 && counter % 150 != 0) {
-      // controller.print(0, 0, "Temps: %d , %d          ",
-      // int(intake.get_temperature()), int(first_stage.get_temperature()));
-      controller.print(
-          0, 0, "R: %d , %d, %d          ", int(rf.get_actual_velocity()),
-          int(rm.get_actual_velocity()), int(rb.get_actual_velocity()));
-  } 
-  if (counter % 100 == 0 && counter % 150 != 0) {
+void print_info(int counter, float chassis_temp)
+{
+  if (counter % 50 == 0 && counter % 100 != 0 && counter % 150 != 0)
+  {
+    // controller.print(0, 0, "Temps: %d , %d          ",
+    // int(intake.get_temperature()), int(first_stage.get_temperature()));
+    controller.print(
+        0, 0, "R: %d , %d, %d          ", int(rf.get_actual_velocity()),
+        int(rm.get_actual_velocity()), int(rb.get_actual_velocity()));
+  }
+  if (counter % 100 == 0 && counter % 150 != 0)
+  {
     controller.print(1, 0, "Chassis: %f   ", float(chassis_temp));
     // controller.print(1, 0, "L: %d , %d, %d          ",
     // int(lf.get_actual_velocity()), int(lm.get_actual_velocity()),
     // int(lb.get_actual_velocity()));
-  } if (counter % 150 == 0 && counter % 300 != 0) {
+  }
+  if (counter % 150 == 0 && counter % 300 != 0)
+  {
     // controller.print(2, 0, "Lift pos: %d", lift_pos);
-    controller.print(2, 0, "Temps: %d , %d, %d          ",
-                      int(intake.get_temperature()),
-                      int(first_stage.get_temperature()));
+    controller.print(2, 0, "Temps: %d , %d          ",
+                     int(intake.get_temperature()),
+                     int(first_stage.get_temperature()));
   }
 }
-void driver() {
+void driver()
+{
 
   // ----------- Driver Graph ---------- //
 
@@ -109,31 +115,41 @@ void driver() {
   static bool vtoggle_reverse = false;
   static bool vtoggle_stop = true;
 
-  if (controller.get_digital_new_press(DIGITAL_DOWN)) {
-    if (vtoggle_reverse) {
+  if (controller.get_digital_new_press(DIGITAL_DOWN))
+  {
+    if (vtoggle_reverse)
+    {
       vtoggle_forward = true;
       vtoggle_reverse = false;
       vtoggle_stop = false;
-    } else if (!vtoggle_forward) {
+    }
+    else if (!vtoggle_forward)
+    {
       vtoggle_forward = true;
       vtoggle_stop = false;
-
-    } else if (vtoggle_forward) {
+    }
+    else if (vtoggle_forward)
+    {
       vtoggle_forward = false;
       vtoggle_reverse = false;
       vtoggle_stop = true;
     }
   }
-  if (controller.get_digital_new_press(DIGITAL_B)) {
-    if (vtoggle_forward) {
+  if (controller.get_digital_new_press(DIGITAL_B))
+  {
+    if (vtoggle_forward)
+    {
       vtoggle_reverse = true;
       vtoggle_forward = false;
       vtoggle_stop = false;
-    } else if (!vtoggle_reverse) {
+    }
+    else if (!vtoggle_reverse)
+    {
       vtoggle_reverse = true;
       vtoggle_stop = false;
-
-    } else if (vtoggle_reverse) {
+    }
+    else if (vtoggle_reverse)
+    {
       vtoggle_forward = false;
       vtoggle_reverse = false;
       vtoggle_stop = true;
@@ -142,37 +158,57 @@ void driver() {
 
   // ----------- Vertical Intake Speed Con --------- //
 
-  if (vtoggle_forward) {
+  if (vtoggle_forward)
+  {
     intake.move(127);
-  } else if (vtoggle_reverse) {
+  }
+  else if (vtoggle_reverse)
+  {
     intake.move(-75);
-  } else if (vtoggle_stop) {
+  }
+  else if (vtoggle_stop)
+  {
     intake.move(0);
-  } else {
+  }
+  else
+  {
     intake.move(0);
   }
 
   // ----------- First Stage Intake Con --------- //
 
-  if (controller.get_digital(DIGITAL_R1) and vtoggle_reverse and not vtoggle_stop){
+  if (controller.get_digital(DIGITAL_R1) and vtoggle_reverse and not vtoggle_stop)
+  {
     first_stage.move(75);
   }
-  else if (controller.get_digital(DIGITAL_R1) and vtoggle_forward and not vtoggle_stop) {
+  else if (controller.get_digital(DIGITAL_R1) and vtoggle_forward and not vtoggle_stop)
+  {
     first_stage.move(127);
-  } else if (controller.get_digital(DIGITAL_R1) and vtoggle_stop) {
+  }
+  else if (controller.get_digital(DIGITAL_R1) and vtoggle_stop)
+  {
     first_stage.move(127);
-  } else if (controller.get_digital(DIGITAL_R2)) {
+  }
+  else if (controller.get_digital(DIGITAL_R2))
+  {
     first_stage.move(-127);
-  } else {
+  }
+  else
+  {
     first_stage.move(0);
   }
   // ----------- Lift Con --------- //
 
-  if (controller.get_digital(DIGITAL_L1)) {
+  if (controller.get_digital(DIGITAL_L1))
+  {
     lift.move(127);
-  } else if (controller.get_digital(DIGITAL_L2)) {
+  }
+  else if (controller.get_digital(DIGITAL_L2))
+  {
     lift.move(-127);
-  } else {
+  }
+  else
+  {
     lift.move(0);
   }
   // static int jam_delay = 0;
@@ -192,13 +228,15 @@ void driver() {
   // ----------- Piston Con --------- //
 
   static bool clampState = false;
-  if (controller.get_digital_new_press(DIGITAL_RIGHT)) {
+  if (controller.get_digital_new_press(DIGITAL_RIGHT))
+  {
     clampState = !clampState;
     clampP.set_value(clampState);
   }
 
   static bool tiltState = false;
-  if (controller.get_digital_new_press(DIGITAL_Y)) {
+  if (controller.get_digital_new_press(DIGITAL_Y))
+  {
     tiltState = !tiltState;
     tiltP.set_value(tiltState);
   }
@@ -206,7 +244,8 @@ void driver() {
   // ----------- Incorporate with Scuffs --------- //
 
   static bool intakeState = false;
-  if (controller.get_digital_new_press(DIGITAL_LEFT)) {
+  if (controller.get_digital_new_press(DIGITAL_LEFT))
+  {
     intakeState = !intakeState;
     intakeP.set_value(intakeState);
   }
@@ -214,14 +253,20 @@ void driver() {
   Timer timer;
   static bool lift_safe = false;
   int counter = 0;
-  if (controller.get_digital_new_press(DIGITAL_X)) {
-    if (!lift_safe) {
+  if (controller.get_digital_new_press(DIGITAL_X))
+  {
+    if (!lift_safe)
+    {
       lift_safe = true;
-    } else {
+    }
+    else
+    {
       timer.startTime();
-      while (timer.getTime() < 600) {
+      while (timer.getTime() < 600)
+      {
         lift.move(75);
-        if (timer.getTime() > 250 && counter < 1) {
+        if (timer.getTime() > 250 && counter < 1)
+        {
           intakeState = !intakeState;
           intakeP.set_value(intakeState);
           counter++;
