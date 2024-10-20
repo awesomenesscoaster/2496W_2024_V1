@@ -23,32 +23,34 @@ void flipout(){
 }
 
 void rush_blue_left(){
-  drive(-1730, 850);
-  lift.move(30);
-  turn_to(33.5, 450);
+  lift.move(40);
+  drive(-1755, 850);  
+  turn_to(30, 450);
+  delay(10);
   lift.move(0);
-  drive(-395, 600, 1, 60);
-  drive(-75, 300, 1, 30);
+  drive(-300, 600, 1, 60);
+  drive(-190, 300, 1, 30);
 
   
   clampP.set_value(true);
-  intakeP.set_value(true);
-  delay(25);
 
-  drive(200, 300);
+  drive(-60, 300, 3);
+  intakeP.set_value(true);
+
+  drive(200, 300, 1.5);
   tiltP.set_value(true);
 
   
-  delay(100);
-  turn_to(-20, 800);
-  turn_to(-49, 800);
-
+  delay(1000);
+ 
+  turn_to(-20, 2000, 1, 80);
+  lift.move(-50);
+  turn_to(-50, 800);  
+  lift.move(0);
   intake.move(-40);
   first_stage.move(-127);
-  lift.move(-50);
-  delay(100);
-  lift.move(0);
-  delay(300);
+
+  delay(400);
   intake.move(127);
   first_stage.move(127);
   drive(100, 50, 2);
@@ -58,7 +60,7 @@ void rush_blue_left(){
 
   delay(300);
   turn_to(-135, 700);
-  drive(-432, 900);
+  drive(-435, 900);
   intake.move(-50);
   delay(50);
   tiltP.set_value(false);
@@ -72,18 +74,18 @@ void rush_blue_left(){
   
   drive(-1000, 800, 1);
   
-  drive(-200, 800, 1, 30);
+  drive(-275, 800, 1, 35);
   clampP.set_value(true);
-  delay(50);
+  delay(150);
   tiltP.set_value(true);
-  delay(300);
-  lift.move(25);
-  turn_to(-65, 1000);
+  delay(400);
+  lift.move(17);
+  turn_to(-57, 1000);
   intake.move(0);
   intakeP.set_value(false);
   delay(250);
   lift.move(0);
-  drive(1235, 1000, 1, 80);
+  drive(1215, 1000, 1, 80);
   
   intakeP.set_value(true);
   delay(250);
@@ -98,9 +100,10 @@ void rush_blue_left(){
   // drive(-1200, 1000);
 
   turn_to(-135, 1000);
+  drive(200, 2000, 1, 30);
 
-  drive(500, 1000);
   intake.move(0);
+  
   
   // first_stage.move(-127);
   // pros::delay(5000);
@@ -108,8 +111,90 @@ void rush_blue_left(){
 }
 
 void rush_red_right() {
+  lift.move(40);
+  drive(-1755, 850);  
+  turn_to(-30, 450);
+  delay(10);
+  lift.move(0);
+  drive(-300, 600, 1, 60);
+  drive(-190, 300, 1, 30);
 
+  
+  clampP.set_value(true);
 
+  drive(-60, 300, 3);
+  intakeP.set_value(true);
+
+  drive(200, 300, 1.5);
+  tiltP.set_value(true);
+
+  
+  delay(1000);
+ 
+  turn_to(20, 2000, 1, 80);
+  lift.move(-50);
+  turn_to(50, 800);
+  lift.move(0);
+  intake.move(-40);
+  first_stage.move(-127);
+
+  delay(400);
+  intake.move(127);
+  first_stage.move(127);
+  drive(100, 50, 2);
+
+  delay(300);
+  drive(400, 500, 1, 70);
+
+  delay(300);
+  turn_to(135, 700);
+  drive(-435, 900);
+  intake.move(-50);
+  delay(50);
+  tiltP.set_value(false);
+  clampP.set_value(false);
+  delay(65);
+  intake.move(0);
+  
+  turn_to(-93.5, 750);
+  intake.move(0);
+  delay(200);
+  
+  drive(-1000, 800, 1);
+  
+  drive(-275, 800, 1, 35);
+  clampP.set_value(true);
+  delay(150);
+  tiltP.set_value(true);
+  delay(400);
+  lift.move(17);
+  turn_to(57, 1000);
+  intake.move(0);
+  intakeP.set_value(false);
+  delay(250);
+  lift.move(0);
+  drive(1215, 1000, 1, 80);
+  
+  intakeP.set_value(true);
+  delay(250);
+  first_stage.move(127);
+  delay(75);
+  intake.move(127);
+  delay(200);
+  drive(-200, 300);
+  
+  // turn_to(52, 400);
+  // drive(1200, 1000);
+  // drive(-1200, 1000);
+
+  turn_to(135, 1000);
+  drive(200, 2000, 1, 30);
+
+  intake.move(0);
+  
+  
+  // first_stage.move(-127);
+  // pros::delay(5000);
 }
 
 void awp_blue_right(){
@@ -117,6 +202,9 @@ void awp_blue_right(){
 } 
 
 void awp_red_left(){
+  lift.move(20);
+  drive(-1800, 1000, 90);
+  //clampP.set_value(true);
   
 } 
 
