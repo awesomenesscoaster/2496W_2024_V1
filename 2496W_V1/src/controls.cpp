@@ -71,9 +71,7 @@ void print_info(int counter, float chassis_temp)
   {
     // controller.print(0, 0, "Temps: %d , %d          ",
     // int(intake.get_temperature()), int(first_stage.get_temperature()));
-    controller.print(
-        0, 0, "R: %d , %d, %d          ", int(rf.get_actual_velocity()),
-        int(rm.get_actual_velocity()), int(rb.get_actual_velocity()));
+    controller.print(0, 0, "R: %d , %d, %d          ", int(rf.get_actual_velocity()), int(rm.get_actual_velocity()), int(rb.get_actual_velocity()));
   }
   if (counter % 100 == 0 && counter % 150 != 0)
   {
@@ -85,9 +83,7 @@ void print_info(int counter, float chassis_temp)
   if (counter % 150 == 0 && counter % 300 != 0)
   {
     // controller.print(2, 0, "Lift pos: %d", lift_pos);
-    controller.print(2, 0, "Temps: %d , %d          ",
-                     int(intake.get_temperature()),
-                     int(first_stage.get_temperature()));
+    controller.print(2, 0, "Temps: %d , %d          ", int(intake.get_temperature()), int(first_stage.get_temperature()));
   }
 }
 void driver()
@@ -101,179 +97,70 @@ void driver()
   // set it to 0)
   rawLAxis = controller.get_analog(ANALOG_LEFT_Y);
   rawRAxis = controller.get_analog(ANALOG_RIGHT_X);
-  lAxis = abs(rawLAxis) <= 5 ? 0 : rawLAxis;
-  rAxis = abs(rawRAxis) <= 5 ? 0 : rawRAxis;
+  lAxis = abs(rawLAxis) <= 8 ? 0 : rawLAxis;
+  rAxis = abs(rawRAxis) <= 8 ? 0 : rawRAxis;
 
   lPwr = lAxis + rAxis;
   rPwr = lAxis - rAxis;
 
   driver_move(lPwr, rPwr);
 
-  // ----------- Vertical Intake Toggle --------- //
+  // ----------- Intake Con --------- //
 
-  static bool vtoggle_forward = false;
-  static bool vtoggle_reverse = false;
-  static bool vtoggle_stop = true;
-
-  if (controller.get_digital_new_press(DIGITAL_DOWN))
+  if (controller.get_digital(DIGITAL_R1))
   {
-    if (vtoggle_reverse)
-    {
-      vtoggle_forward = true;
-      vtoggle_reverse = false;
-      vtoggle_stop = false;
-    }
-    else if (!vtoggle_forward)
-    {
-      vtoggle_forward = true;
-      vtoggle_stop = false;
-    }
-    else if (vtoggle_forward)
-    {
-      vtoggle_forward = false;
-      vtoggle_reverse = false;
-      vtoggle_stop = true;
-    }
-  }
-  if (controller.get_digital_new_press(DIGITAL_B))
-  {
-    if (vtoggle_forward)
-    {
-      vtoggle_reverse = true;
-      vtoggle_forward = false;
-      vtoggle_stop = false;
-    }
-    else if (!vtoggle_reverse)
-    {
-      vtoggle_reverse = true;
-      vtoggle_stop = false;
-    }
-    else if (vtoggle_reverse)
-    {
-      vtoggle_forward = false;
-      vtoggle_reverse = false;
-      vtoggle_stop = true;
-    }
-  }
-
-  // ----------- Vertical Intake Speed Con --------- //
-
-  if (vtoggle_forward)
-  {
+    first_stage.move(127);
     intake.move(127);
   }
-  else if (vtoggle_reverse)
-  {
-    intake.move(-75);
-  }
-  else if (vtoggle_stop)
-  {
-    intake.move(0);
-  }
-  else
-  {
-    intake.move(0);
-  }
-
-  // ----------- First Stage Intake Con --------- //
-
-  if (controller.get_digital(DIGITAL_R1) and vtoggle_reverse and not vtoggle_stop)
-  {
-    first_stage.move(75);
-  }
-  else if (controller.get_digital(DIGITAL_R1) and vtoggle_forward and not vtoggle_stop)
-  {
-    first_stage.move(127);
-  }
-  else if (controller.get_digital(DIGITAL_R1) and vtoggle_stop)
-  {
-    first_stage.move(127);
-  }
   else if (controller.get_digital(DIGITAL_R2))
+  { 
+    first_stage.move(-127);
+  }
+  else if (controller.get_digital(DIGITAL_R1) && controller.get_digital(DIGITAL_R2))
   {
     first_stage.move(-127);
+    intake.move(-127);
   }
   else
   {
     first_stage.move(0);
+    intake.move(0);
   }
   // ----------- Lift Con --------- //
 
-  if (controller.get_digital(DIGITAL_L1))
+  if (controller.get_digital_new_press(DIGITAL_RIGHT))
   {
-    lift.move(127);
+    //lift macro 1 -- move to scoring height
   }
-  else if (controller.get_digital(DIGITAL_L2))
+  if (controller.get_digital_new_press(DIGITAL_Y))
   {
-    lift.move(-127);
+    //lift macro 2 -- move to height where i can intake onto goal
   }
-  else
-  {
-    lift.move(0);
-  }
-  // static int jam_delay = 0;
-  // if (jam_delay == 0 and abs(intake.get_actual_velocity()) < 5 and
-  // (vtoggle_forward == true or vtoggle_reverse == true)){
-  //   controller.rumble("......");
-  //   vtoggle_forward = false;
-  //   vtoggle_reverse = false;
-  //   vtoggle_stop = true;
-  //   jam_delay = 5000;
-  // }
 
-  // if (jam_delay > 0){
-  //   jam_delay -= 2;
-  // }
+  if (controller.get_digital_new_press(DIGITAL_DOWN))
+  {
+    //lift macro 3 -- move to height where i can put ring on top? holder (1st ring)
+  }
+
+  if (controller.get_digital_new_press(DIGITAL_B))
+  {
+    //lift macro 4 -- move to height where i can put ring on bottom? holder (2nd ring)
+  }
+
 
   // ----------- Piston Con --------- //
 
   static bool clampState = false;
-  if (controller.get_digital_new_press(DIGITAL_RIGHT))
+  if (controller.get_digital_new_press(DIGITAL_L1))
   {
     clampState = !clampState;
     clampP.set_value(clampState);
   }
 
-  static bool tiltState = false;
-  if (controller.get_digital_new_press(DIGITAL_Y))
-  {
-    tiltState = !tiltState;
-    tiltP.set_value(tiltState);
-  }
-
-  // ----------- Incorporate with Scuffs --------- //
-
   static bool intakeState = false;
-  if (controller.get_digital_new_press(DIGITAL_LEFT))
+  if (controller.get_digital_new_press(DIGITAL_L2))
   {
     intakeState = !intakeState;
     intakeP.set_value(intakeState);
-  }
-
-  Timer timer;
-  static bool lift_safe = false;
-  int counter = 0;
-  if (controller.get_digital_new_press(DIGITAL_X))
-  {
-    if (!lift_safe)
-    {
-      lift_safe = true;
-    }
-    else
-    {
-      timer.startTime();
-      while (timer.getTime() < 600)
-      {
-        lift.move(75);
-        if (timer.getTime() > 250 && counter < 1)
-        {
-          intakeState = !intakeState;
-          intakeP.set_value(intakeState);
-          counter++;
-        }
-      }
-      lift.move(0);
-      lift_safe = false;
-    }
   }
 }
