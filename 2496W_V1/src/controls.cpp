@@ -106,8 +106,12 @@ void driver()
   driver_move(lPwr, rPwr);
 
   // ----------- Intake Con --------- //
-
-  if (controller.get_digital(DIGITAL_R1))
+  if (controller.get_digital(DIGITAL_R1) && controller.get_digital(DIGITAL_R2))
+  {
+    first_stage.move(-127);
+    intake.move(-127);
+  }
+  else if (controller.get_digital(DIGITAL_R1))
   {
     first_stage.move(127);
     intake.move(127);
@@ -116,17 +120,28 @@ void driver()
   { 
     first_stage.move(-127);
   }
-  else if (controller.get_digital(DIGITAL_R1) && controller.get_digital(DIGITAL_R2))
-  {
-    first_stage.move(-127);
-    intake.move(-127);
-  }
+  
   else
   {
     first_stage.move(0);
     intake.move(0);
-  }
+  } 
   // ----------- Lift Con --------- //
+
+
+  if (controller.get_digital(DIGITAL_L1))
+  {
+    lift.move(127);
+  }
+  else if (controller.get_digital(DIGITAL_L2))
+  { 
+    lift.move(-127);
+  }
+  else
+  {
+    lift.move(0);
+  }
+
 
   if (controller.get_digital_new_press(DIGITAL_RIGHT))
   {
