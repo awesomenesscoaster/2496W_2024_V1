@@ -11,9 +11,9 @@
 
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
-pros::Motor lf(0, MOTOR_GEARSET_06, true, MOTOR_ENCODER_DEGREES);
+pros::Motor lf(13, MOTOR_GEARSET_06, true, MOTOR_ENCODER_DEGREES);
 pros::Motor lm(10, MOTOR_GEARSET_06, true, MOTOR_ENCODER_DEGREES); // good
-pros::Motor lb(0, MOTOR_GEARSET_06, true, MOTOR_ENCODER_DEGREES);
+pros::Motor lb(11, MOTOR_GEARSET_06, true, MOTOR_ENCODER_DEGREES);
 
 pros::Motor rf(3, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES); //good
 pros::Motor rm(21, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES); // good
@@ -29,7 +29,7 @@ pros::Motor lift(12, MOTOR_GEARSET_18, true, MOTOR_ENCODER_DEGREES); //good
 
 pros::IMU imu(0);
 
-pros::ADIPotentiometer rotation(0);
+pros::ADIPotentiometer rotation(14);
 
 pros::ADIDigitalOut clampP(2, false);
 pros::ADIDigitalOut tiltP(1, false);
