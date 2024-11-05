@@ -31,7 +31,9 @@ pros::IMU imu(0);
 
 pros::ADIPotentiometer rotation(14);
 
-pros::ADIDigitalOut clampP(2, false);
-pros::ADIDigitalOut tiltP(1, false);
-pros::ADIDigitalOut intakeP(3, false);
+pros::ADIDigitalOut clampP(1, false);
+pros::ADIDigitalOut intakeP(2, false);
+pros::ADIDigitalOut spikeP(3, false);
+
+
 pros::ADIDigitalOut blankP(6, false);

@@ -65,25 +65,26 @@ void print_info_auton(int time, double error, double speed)
     controller.print(2, 0, "%.2f | %.0f       ", error, time);
 }
 
-void print_info(int counter, float chassis_temp)
+void print_info(int counter, float chassis_temp, int lift_pos)
 {
   if (counter % 50 == 0 && counter % 100 != 0 && counter % 150 != 0)
   {
+    controller.print(0, 0, "C: %f   ", float(chassis_temp));
     // controller.print(0, 0, "Temps: %d , %d          ",
     // int(intake.get_temperature()), int(first_stage.get_temperature()));
-    controller.print(0, 0, "R: %d , %d, %d          ", int(rf.get_actual_velocity()), int(rm.get_actual_velocity()), int(rb.get_actual_velocity()));
+    // controller.print(0, 0, "R: %d , %d, %d          ", int(rf.get_actual_velocity()), int(rm.get_actual_velocity()), int(rb.get_actual_velocity()));
   }
   if (counter % 100 == 0 && counter % 150 != 0)
   {
-    controller.print(1, 0, "Chassis: %f   ", float(chassis_temp));
+    controller.print(1, 0, "1: %d , 2: %d, L: %d          ", int(intake.get_temperature()), int(first_stage.get_temperature()), int(lift.get_temperature()));
     // controller.print(1, 0, "L: %d , %d, %d          ",
     // int(lf.get_actual_velocity()), int(lm.get_actual_velocity()),
     // int(lb.get_actual_velocity()));
   }
   if (counter % 150 == 0 && counter % 300 != 0)
   {
-    // controller.print(2, 0, "Lift pos: %d", lift_pos);
-    controller.print(2, 0, "Temps: %d , %d          ", int(intake.get_temperature()), int(first_stage.get_temperature()));
+    controller.print(2, 0, "Lift pos: %d", lift_pos);
+    
   }
 }
 void driver()
@@ -129,13 +130,13 @@ void driver()
   // ----------- Lift Con --------- //
 
 
-  if (controller.get_digital(DIGITAL_L1))
+  if (controller.get_digital(DIGITAL_RIGHT))
   {
-    lift.move(127);
-  }
-  else if (controller.get_digital(DIGITAL_L2))
-  { 
     lift.move(-127);
+  }
+  else if (controller.get_digital(DIGITAL_Y))
+  { 
+    lift.move(127);
   }
   else
   {
@@ -143,24 +144,24 @@ void driver()
   }
 
 
-  if (controller.get_digital_new_press(DIGITAL_RIGHT))
-  {
-    //lift macro 1 -- move to scoring height
-  }
-  if (controller.get_digital_new_press(DIGITAL_Y))
-  {
-    //lift macro 2 -- move to height where i can intake onto goal
-  }
+  // if (controller.get_digital_new_press(DIGITAL_RIGHT))
+  // {
+  //   //lift macro 1 -- move to scoring height
+  // }
+  // if (controller.get_digital_new_press(DIGITAL_Y))
+  // {
+  //   //lift macro 2 -- move to height where i can intake onto goal
+  // }
 
-  if (controller.get_digital_new_press(DIGITAL_DOWN))
-  {
-    //lift macro 3 -- move to height where i can put ring on top? holder (1st ring)
-  }
+  // if (controller.get_digital_new_press(DIGITAL_DOWN))
+  // {
+  //   //lift macro 3 -- move to height where i can put ring on top? holder (1st ring)
+  // }
 
-  if (controller.get_digital_new_press(DIGITAL_B))
-  {
-    //lift macro 4 -- move to height where i can put ring on bottom? holder (2nd ring)
-  }
+  // if (controller.get_digital_new_press(DIGITAL_B))
+  // {
+  //   //lift macro 4 -- move to height where i can put ring on bottom? holder (2nd ring)
+  // }
 
 
   // ----------- Piston Con --------- //
@@ -178,4 +179,12 @@ void driver()
     intakeState = !intakeState;
     intakeP.set_value(intakeState);
   }
+
+  static bool spikeState = false;
+  if (controller.get_digital_new_press(DIGITAL_DOWN))
+  {
+    spikeState = !spikeState;
+    spikeP.set_value(spikeState);
+  }
+
 }

@@ -38,7 +38,7 @@ void rush_blue_left(){
   intakeP.set_value(true);
 
   drive(200, 300, 1.5);
-  tiltP.set_value(true);
+  // tiltP.set_value(true);
 
   
   delay(1000);
@@ -63,7 +63,7 @@ void rush_blue_left(){
   drive(-435, 900);
   intake.move(-50);
   delay(50);
-  tiltP.set_value(false);
+  // tiltP.set_value(false);
   clampP.set_value(false);
   delay(65);
   intake.move(0);
@@ -77,7 +77,7 @@ void rush_blue_left(){
   drive(-275, 800, 1, 35);
   clampP.set_value(true);
   delay(150);
-  tiltP.set_value(true);
+  // tiltP.set_value(true);
   delay(400);
   lift.move(17);
   turn_to(-57, 1000);
@@ -126,7 +126,7 @@ void rush_red_right() {
   intakeP.set_value(true);
 
   drive(200, 300, 1.5);
-  tiltP.set_value(true);
+  // tiltP.set_value(true);
 
   
   delay(1000);
@@ -151,7 +151,7 @@ void rush_red_right() {
   drive(-435, 900);
   intake.move(-50);
   delay(50);
-  tiltP.set_value(false);
+  // tiltP.set_value(false);
   clampP.set_value(false);
   delay(65);
   intake.move(0);
@@ -165,7 +165,7 @@ void rush_red_right() {
   drive(-275, 800, 1, 35);
   clampP.set_value(true);
   delay(150);
-  tiltP.set_value(true);
+  // tiltP.set_value(true);
   delay(400);
   lift.move(17);
   turn_to(57, 1000);
@@ -216,7 +216,7 @@ void skills(){
   clampP.set_value(true);
   pros::delay(200);
   drive(180, 200);
-  tiltP.set_value(true);
+  // tiltP.set_value(true);
   first_stage.move(127);
   pros::delay(700);
   turn_to(-56.5, 800);

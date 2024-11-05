@@ -57,10 +57,10 @@ void opcontrol() {
   while (true) {
     double chassis_temp =
         (lf.get_temperature() + lm.get_temperature() + lb.get_temperature() +
-         rf.get_temperature() + rm.get_temperature() + rb.get_temperature()) /
-        6;
+         rf.get_temperature() + rm.get_temperature() + rb.get_temperature()) / 6;
+    
     int lift_pos = rotation.get_value();
-    print_info(counter, chassis_temp);
+    print_info(counter, chassis_temp, lift_pos);
     counter++;
 
     if (controller.get_digital_new_press(E_CONTROLLER_DIGITAL_UP)) {
@@ -70,8 +70,5 @@ void opcontrol() {
     driver();
     pros::delay(2);
     time += 2;
-    // if(intake.get_temperature() >= 50) {
-    //   controller.rumble("-");
-    // }
   }
 }

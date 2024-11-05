@@ -30,10 +30,9 @@ extern pros::IMU imu;
 extern pros::ADIPotentiometer rotation;
 
 extern pros::ADIDigitalOut clampP;
-extern pros::ADIDigitalOut tiltP;
 extern pros::ADIDigitalOut intakeP;
+extern pros::ADIDigitalOut spikeP;
 extern pros::ADIDigitalOut blankP;
-
 
 
 
