@@ -25,6 +25,7 @@ void initialize() {
   static Auton temp = auton_selector(autons);
   names = temp.get_name();
   auton = &temp;
+  rotation.reset();
 }
 
 /**
@@ -32,7 +33,9 @@ void initialize() {
  * the VEX Competition Switch, following either autonomous or opcontrol. When
  * the robot is enabled, this task will exit.
  */
-void disabled() {}
+void disabled() {
+
+}
 
 void competition_initialize() {}
 
@@ -45,7 +48,7 @@ void autonomous() { (*auton).run(); }
 void opcontrol() {
   long long time = 0;
   int counter = 0;
-
+  
   // brake types
   set_brake_coast(); // chassis coast
   lift.set_brake_mode(MOTOR_BRAKE_HOLD);
@@ -59,7 +62,7 @@ void opcontrol() {
         (lf.get_temperature() + lm.get_temperature() + lb.get_temperature() +
          rf.get_temperature() + rm.get_temperature() + rb.get_temperature()) / 6;
     
-    int lift_pos = rotation.get_value();
+    int lift_pos = rotation.get_position();
     print_info(counter, chassis_temp, lift_pos);
     counter++;
 
