@@ -25,7 +25,7 @@ void initialize() {
   static Auton temp = auton_selector(autons);
   names = temp.get_name();
   auton = &temp;
-  rotation.reset();
+  rotation.reset_position();
 }
 
 /**
@@ -34,7 +34,7 @@ void initialize() {
  * the robot is enabled, this task will exit.
  */
 void disabled() {
-
+  
 }
 
 void competition_initialize() {}

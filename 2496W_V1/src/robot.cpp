@@ -25,7 +25,7 @@ pros::Motor_Group right({rf, rm, rb});
 pros::Motor first_stage(20, MOTOR_GEARSET_18, true, MOTOR_ENCODER_DEGREES); 
 pros::Motor intake(17, MOTOR_GEARSET_06, false, MOTOR_ENCODER_DEGREES);
 
-pros::Motor lift(12, MOTOR_GEARSET_18, true, MOTOR_ENCODER_DEGREES); //change port on this
+pros::Motor lift(15, MOTOR_GEARSET_18, false, MOTOR_ENCODER_DEGREES); //change port on this
 
 pros::IMU imu(16);
 

@@ -109,8 +109,8 @@ void driver()
   // ----------- Intake Con --------- //
   if (controller.get_digital(DIGITAL_R1) && controller.get_digital(DIGITAL_R2))
   {
-    first_stage.move(-127);
-    intake.move(-127);
+    first_stage.move(127);
+    intake.move(100);
   }
   else if (controller.get_digital(DIGITAL_R1))
   {
