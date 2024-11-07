@@ -393,5 +393,96 @@ namespace pid{
         //turn(degree, timeout, multi, max_speed, exit_time);
         turn(degree, timeout, true, multi, max_speed, exit_time, tolerance);
     }
+    
+
+    void spin_lift(double position, int timeout=2000, double max_speed=127, int exit_time=100){
+        double lift_pos = rotation.get_position();
+
+        
+        double LIFT_KP;
+        double LIFT_KI;
+        double LIFT_KD;
+
+        LIFT_KP = 4.6;
+        LIFT_KI = 1.05; 
+        LIFT_KD = 0.37;  
+
+        double target = position + lift_pos; 
+        double error = position;
+        double prev_error;
+        double integral = 0;
+        double derivative = 0;
+        double error_range_time;
+        double early_exit_time = 0;
+
+        double speed;
+
+        bool exit = false;
+        bool same_error = false;
+
+
+        int time = 0;
+
+        //int scaler = (target_deg<20 ? 1000 : 100);
+        int scaler = 100;
+
+
+        while (time < timeout)
+        {
+            double speed;
+            prev_error = error;
+            error = target - rotation.get_position();
+            
+            if(fabs(error) < 300){
+                integral += error;
+            }
+
+    
+            derivative = (error - prev_error) * 100;
+
+            if (derivative){
+                speed = error * LIFT_KP + integral * LIFT_KI + derivative * LIFT_KD;
+            }
+
+
+            if (fabs(error) < 200) // 0.15
+            {
+                if(!exit){
+                    exit = true;
+                }
+                else{
+                    error_range_time += 10;
+                }
+                if (exit_time <= error_range_time){
+                    break;
+                }
+            }
+
+            // if (fabs(error) < 2 && (std::round(prev_error * scaler) / scaler - std::round(error * scaler) / scaler < 0.02)) // 0.15
+            // {
+            //     if(!same_error)
+            //         same_error = true;
+            //     else
+            //         early_exit_time += 10;
+            //     if (exit_time <= early_exit_time)
+            //         break;
+            // }
+            // if (target_deg > 0 && speed < 0 &&(-6<error && error<0.3)) speed *= K_BOOST;
+            // else if (target_deg < 0 && speed > 0 && (0.3<error && error<6)) speed *= K_BOOST;
+
+            lift.move(speed);
+
+           print_info_auton(time, error, speed); 
+
+
+            pros::delay(10);
+            time+= 10;
+        }
+        lift.move(0);
+
+    }
+
+
+    
 
 }

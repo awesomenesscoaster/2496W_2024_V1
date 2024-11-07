@@ -26,6 +26,7 @@ void initialize() {
   names = temp.get_name();
   auton = &temp;
   rotation.reset_position();
+  rotation.set_position(1000);
 }
 
 /**
