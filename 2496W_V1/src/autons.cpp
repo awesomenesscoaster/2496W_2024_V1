@@ -7,27 +7,39 @@
 using namespace pid;
 // ---------- All autonomous routes --------- //f
 using namespace pros;
+/*
+drive(2000, 2000, 1, 60 );
 
-void flipout(){
-  lift.move(127);
-  pros::delay(100);
-  lift.move(0);
-  intakeP.set_value(true);
-  drive(300, 200, 2);
-  drive(-300, 200, 2);
-  pros::delay(100);
-  lift.move(-127);
-  pros::delay(400);
+  intakeP.set_value(false);
+
+  first_stage.move(127);
+  intake.move(127);
+
+  
+  lift.move(40);
+  delay(1000);
   lift.move(0);
 
-}
+  clampP.set_value(true);
+  clampP.set_value(false);
+
+
+*/
+
+
+void flipout(){}
 
 void rush_blue_left(){
-  lift.move(40);
+
+  
+  
+
+
   drive(-1755, 850);  
   turn_to(30, 450);
   delay(10);
   lift.move(0);
+
   drive(-300, 600, 1, 60);
   drive(-190, 300, 1, 30);
 
