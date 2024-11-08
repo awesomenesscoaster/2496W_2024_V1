@@ -25,8 +25,10 @@ void initialize() {
   static Auton temp = auton_selector(autons);
   names = temp.get_name();
   auton = &temp;
+
   rotation.reset_position();
-  rotation.set_position(1000);
+  rotation.set_position(30000);
+
 }
 
 /**
@@ -49,7 +51,8 @@ void autonomous() { (*auton).run(); }
 void opcontrol() {
   long long time = 0;
   int counter = 0;
-  
+  rotation.reset();
+  rotation.set_position(30000);
   // brake types
   set_brake_coast(); // chassis coast
   lift.set_brake_mode(MOTOR_BRAKE_HOLD);

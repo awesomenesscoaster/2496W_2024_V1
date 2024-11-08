@@ -76,7 +76,7 @@ void print_info(int counter, float chassis_temp, int lift_pos)
   }
   if (counter % 100 == 0 && counter % 150 != 0)
   {
-    controller.print(1, 0, "1: %d , 2: %d, L: %d          ", int(intake.get_temperature()), int(first_stage.get_temperature()), int(lift.get_temperature()));
+    controller.print(1, 0, "1: %d, 2: %d, L: %d          ", int(intake.get_temperature()), int(first_stage.get_temperature()), int(lift.get_temperature()));
     // controller.print(1, 0, "L: %d , %d, %d          ",
     // int(lf.get_actual_velocity()), int(lm.get_actual_velocity()),
     // int(lb.get_actual_velocity()));
@@ -91,7 +91,7 @@ void driver()
 {
 
   // ----------- Driver Graph ---------- //
-
+  double lift_pos = rotation.get_position();
   double rPwr, lPwr, rAxis, lAxis, rawLAxis, rawRAxis;
 
   // deadzones (if value is less than 10, which is usually due to stick drift,
@@ -132,16 +132,23 @@ void driver()
 
   if (controller.get_digital(DIGITAL_L1))
   {
-    lift.move(-127);
+    if (lift_pos > 16500){
+      lift.move(127);
+    }
+    else{
+      lift.move(0);
+    }
   }
   else if (controller.get_digital(DIGITAL_L2))
   { 
-    lift.move(127);
+    lift.move(-127);
   }
   else
   {
     lift.move(0);
   }
+
+
 
 
   // if (controller.get_digital_new_press(DIGITAL_RIGHT))
@@ -162,6 +169,28 @@ void driver()
   // {
   //   //lift macro 4 -- move to height where i can put ring on bottom? holder (2nd ring)
   // }
+  static bool liftmacro = false;
+  if (controller.get_digital_new_press(DIGITAL_RIGHT))
+  {
+    liftmacro = !liftmacro; 
+  }
+
+  if (liftmacro){
+    if (lift_pos > 24950 && lift_pos < 25100){
+      lift.move(0);
+      liftmacro = false; 
+    }
+    else{
+      if (lift_pos > 24950 && !(lift_pos < 25100)){
+        lift.move(70);
+      }
+      else{
+        lift.move(-70);
+      }
+    }
+  }
+
+
 
 
   // ----------- Piston Con --------- //
