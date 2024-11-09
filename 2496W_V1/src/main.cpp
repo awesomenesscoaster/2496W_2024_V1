@@ -71,7 +71,7 @@ void opcontrol() {
     counter++;
 
     if (controller.get_digital_new_press(E_CONTROLLER_DIGITAL_UP)) {
-      autonomous();
+      skills();
     }
 
     driver();

@@ -250,53 +250,124 @@ void awp_red_left(){
 } 
 
 void skills(){
-  //Flipout + 1st Ring
-  lift.move(35);
-  drive(-250, 800, 1, 20);
-  lift.move(0);
+  //goal 1
+  intakeP.set_value(true);
+  drive(250, 400);
+  turn_to(-92, 800);
+  drive(-1150, 1000);
   clampP.set_value(true);
-  pros::delay(200);
-  drive(180, 200);
-  // tiltP.set_value(true);
+  pros::delay(300);
+  turn_to(0, 800);
+  // intake.move(127);
+  // pros::delay(300);
+  // intake.move(-127);
+  // pros::delay(150);
+  intake.move(127);
   first_stage.move(127);
-  pros::delay(700);
-  turn_to(-56.5, 800);
-  intakeP.set_value(true);
-  pros::delay(200);
-  intake.move(127);
-  pros::delay(900);
-  intake.move(-75);
-  pros::delay(150);
-  intake.move(127);
-  pros::delay(200);
-  drive(650, 950, 1, 60);
-  pros::delay(1000);
-  intake.move(0);
+  pros::delay(300);
 
-  //3 + 4
-  intakeP.set_value(false);
-  turn_to(-152, 800);
-  lift.move(-65);
-  pros::delay(400);
-  lift.move(0);
-  intakeP.set_value(true);
-  pros::delay(200);
+  //ring 1
+  drive(850, 800);
+  pros::delay(500);
+  intake.move(-127);
+  pros::delay(175);
   intake.move(127);
-  pros::delay(200);
-  drive(500, 500, 1.7);
-  pros::delay(400);
-  turn_to(170, 800);
-  drive(1350, 900);
-  pros::delay(400);
-  turn_to(-58, 800);
-  lift.move(60);
-  pros::delay(150);
-  lift.move(0);
-  drive(1500, 1000, 1.5);
-  pros::delay(400);
-  turn_to(20, 800);
-  drive(2000, 1200);
+  pros::delay(250);
+  turn_to(45, 800);
+  
+  //ring 2
+  drive(1850, 1300);
+  pros::delay(500);
+  intake.move(-127);
+  pros::delay(195);
+  intake.move(127);
+  pros::delay(250);
+  turn_to(-165, 800);
 
+  //ring 3
+  drive(800, 600, 1.5);
+  pros::delay(500);
+  turn_to(150, 800);
+
+  //ring 4
+  drive(1050, 800, 1.5);
+  intake.move(-127);
+  pros::delay(195);
+  intake.move(127);
+  pros::delay(250);
+  pros::delay(500);
+
+  //ring 5 + 6
+  drive(-500, 400);
+  turn_to(-170, 800);
+  drive(400, 400);
+  pros::delay(500);
+  drive(500, 500);
+  pros::delay(500);
+  
+  //drop goal 1
+  turn_to(-60, 800);
+  drive(-1000, 600);
+  clampP.set_value(false);
+
+  //go to goal 2
+  drive(600, 600);
+  turn_to(90, 800);
+  intake.move(-127);
+  drive(-2700, 1500);
+  turn_to(90, 800);
+  drive(-400, 400);
+  clampP.set_value(true);
+  drive(-400, 400);
+  turn_to(0, 800);
+
+  intake.move(127);
+  first_stage.move(127);
+  pros::delay(300);
+
+  // //ring 2-1
+  // drive(850, 800);
+  // pros::delay(500);
+  // intake.move(-127);
+  // pros::delay(175);
+  // intake.move(127);
+  // pros::delay(250);
+  // turn_to(-45, 800);
+  
+  // //ring 2-2
+  // drive(1850, 1300);
+  // pros::delay(500);
+  // intake.move(-127);
+  // pros::delay(195);
+  // intake.move(127);
+  // pros::delay(250);
+  // turn_to(165, 800);
+
+  // //ring 2-3
+  // drive(800, 600);
+  // pros::delay(500);
+  // turn_to(-150, 800);
+
+  // //ring 2-4
+  // drive(1050, 800);
+  // intake.move(-127);
+  // pros::delay(195);
+  // intake.move(127);
+  // pros::delay(250);
+  // pros::delay(500);
+
+  // //ring 2-5 + 2-6
+  // drive(-500, 400);
+  // turn_to(170, 800);
+  // drive(400, 400);
+  // pros::delay(500);
+  // drive(500, 500);
+  // pros::delay(500);
+  
+  // //drop goal 2
+  // turn_to(60, 800);
+  // drive(-1000, 600);
+  // clampP.set_value(false);
 }
 
 
