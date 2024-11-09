@@ -175,7 +175,7 @@ namespace pid{
         double error_range_time = 0;
 
 
-        double drive_kp = 4.62646 * std::pow(fabs(target_dist), -0.689989) + 0.22; 
+        double drive_kp = 4.62646 * std::pow(fabs(target_dist), -0.689989) + 0.20; 
 
         //double drive_kp = 5;
         //NEW:
@@ -183,7 +183,7 @@ namespace pid{
         // 2.04035 * std::pow(fabs(target_dist), -0.534162) + 0.0949831 for 2.5
 
         double drive_ki = 0.053; // 0.00049
-        double drive_kd = 2.8; //0 for good
+        double drive_kd = 2.9; //0 for good
         imuInit = imu.get_rotation();
 
         Timer t2000;
@@ -194,7 +194,7 @@ namespace pid{
             // else if (t2000.getTime()>(piston_open_time + piston_time)) pis.set_value(true);
 
             heading = imuInit - imu.get_rotation();
-            heading = heading*5;
+            heading = heading*2;
             
             prev_error = error;
             error = target_dist - encoder_average;
@@ -256,26 +256,34 @@ namespace pid{
         double TURN_KI;
         double TURN_KD;
 
-        TURN_KP = 4.6;
-        TURN_KI = 1.05; 
-        TURN_KD = 0.37;  
-
-        
-        if (fabs(target_deg) <= 185) 
+        if (fabs(target_deg) <= 185){
+            TURN_KP = 3.41; 
+            TURN_KI = 0.392; 
+            TURN_KD = 0.344; 
+        }
+        if (fabs(target_deg) <= 170) 
         {
-            TURN_KP = 4.6;
-            TURN_KI = 1.05; 
-            TURN_KD = 0.37;  
+            // TURN_KP = 4.6;
+            // TURN_KI = 1.05; 
+            // TURN_KD = 0.37;  
+
+            TURN_KP = 3.379; 
+            TURN_KI = 0.38; 
+            TURN_KD = 0.34; 
         }
         if (fabs(target_deg) < 150) { 
-            TURN_KP = 4.75; //last=4.75//4.3, 4.5
-            TURN_KI = 0.47; //last=.4//0.08, .1, .42
-            TURN_KD = 0.33; //last=.26//.25, .26(earlier), .27(90)
+            // TURN_KP = 4.75; //last=4.75//4.3, 4.5
+            // TURN_KI = 0.47; //last=.4//0.08, .1, .42
+            // TURN_KD = 0.33; //last=.26//.25, .26(earlier), .27(90)
+
+            TURN_KP = 3.3;
+            TURN_KI = 0.37; 
+            TURN_KD = 0.32; 
         }
         if (fabs(target_deg) < 110){
             TURN_KP = 4.75; 
-            TURN_KI = 0.47; 
-            TURN_KD = 0.33; 
+            TURN_KI = 0.48; 
+            TURN_KD = 0.42; 
         }
         if (fabs(target_deg) < 65){
             TURN_KP = 4.28; 
