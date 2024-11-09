@@ -253,9 +253,10 @@ void skills(){
   //goal 1
   intakeP.set_value(true);
   drive(250, 400);
-  turn_to(-92, 800);
-  drive(-1150, 1000);
+  turn_to(-91, 800);
+  drive(-800, 1000);
   clampP.set_value(true);
+  drive(-300, 400);
   pros::delay(300);
   turn_to(0, 800);
   // intake.move(127);
@@ -276,7 +277,7 @@ void skills(){
   turn_to(45, 800);
   
   //ring 2
-  drive(1850, 1300);
+  drive(1900, 1300);
   pros::delay(500);
   intake.move(-127);
   pros::delay(195);
@@ -303,20 +304,20 @@ void skills(){
   drive(400, 400);
   pros::delay(500);
   drive(500, 500);
-  pros::delay(500);
+  pros::delay(700);
   
   //drop goal 1
   turn_to(-60, 800);
   drive(-1000, 600);
   clampP.set_value(false);
+  pros::delay(300);
 
   //go to goal 2
-  drive(600, 600);
-  turn_to(90, 800);
-  intake.move(-127);
-  drive(-2700, 1500);
-  turn_to(90, 800);
-  drive(-400, 400);
+  drive(400, 400);
+  turn_to(90, 1000);
+  drive(-1500, 1000);
+  turn_to(87, 600);
+  drive(-1300, 800);
   clampP.set_value(true);
   drive(-400, 400);
   turn_to(0, 800);
