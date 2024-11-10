@@ -76,7 +76,7 @@ void print_info(int counter, float chassis_temp, int lift_pos)
   }
   if (counter % 100 == 0 && counter % 150 != 0)
   {
-    controller.print(1, 0, "1: %d, 2: %d, L: %d          ", int(intake.get_temperature()), int(first_stage.get_temperature()), int(lift.get_temperature()));
+    controller.print(1, 0, "1: %d, 2: %d, L: %d          ", int(first_stage.get_temperature()), int(intake.get_temperature()), int(lift.get_temperature()));
     // controller.print(1, 0, "L: %d , %d, %d          ",
     // int(lf.get_actual_velocity()), int(lm.get_actual_velocity()),
     // int(lb.get_actual_velocity()));
@@ -98,8 +98,8 @@ void driver()
   // set it to 0)
   rawLAxis = controller.get_analog(ANALOG_LEFT_Y);
   rawRAxis = controller.get_analog(ANALOG_RIGHT_X);
-  lAxis = abs(rawLAxis) <= 8 ? 0 : rawLAxis;
-  rAxis = abs(rawRAxis) <= 8 ? 0 : rawRAxis;
+  lAxis = abs(rawLAxis) <= 10 ? 0 : rawLAxis;
+  rAxis = abs(rawRAxis) <= 10 ? 0 : rawRAxis;
 
   lPwr = lAxis + rAxis;
   rPwr = lAxis - rAxis;
@@ -132,7 +132,7 @@ void driver()
 
   if (controller.get_digital(DIGITAL_L1))
   {
-    if (lift_pos > 16500){
+    if (lift_pos > 17500){
       lift.move(127);
     }
     else{
@@ -176,6 +176,21 @@ void driver()
   }
 
   if (liftmacro){
+    if (lift_pos > 25700 && lift_pos < 27000){
+      lift.move(0);
+      liftmacro = false; 
+    }
+    else{
+      if (lift_pos > 25700 && !(lift_pos < 27000a)){
+        lift.move(70);
+      }
+      else{
+        lift.move(0);
+      }
+    }
+  }
+
+  /*if (liftmacro){
     if (lift_pos > 24950 && lift_pos < 25100){
       lift.move(0);
       liftmacro = false; 
@@ -188,7 +203,7 @@ void driver()
         lift.move(-70);
       }
     }
-  }
+  }*/
 
 
 
