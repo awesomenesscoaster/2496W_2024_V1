@@ -6,12 +6,10 @@
 #include "pros/misc.h"
 #include "pros/motors.h"
 
-
 #include "piston.h"
 #include "robot.h"
 #include <cmath>
 #include <iostream>
-
 
 using namespace std;
 
@@ -28,7 +26,6 @@ void initialize() {
 
   rotation.reset_position();
   rotation.set_position(30000);
-
 }
 
 /**
@@ -36,9 +33,7 @@ void initialize() {
  * the VEX Competition Switch, following either autonomous or opcontrol. When
  * the robot is enabled, this task will exit.
  */
-void disabled() {
-  
-}
+void disabled() {}
 
 void competition_initialize() {}
 
@@ -64,8 +59,9 @@ void opcontrol() {
   while (true) {
     double chassis_temp =
         (lf.get_temperature() + lm.get_temperature() + lb.get_temperature() +
-         rf.get_temperature() + rm.get_temperature() + rb.get_temperature()) / 6;
-    
+         rf.get_temperature() + rm.get_temperature() + rb.get_temperature()) /
+        6;
+
     int lift_pos = rotation.get_position();
     print_info(counter, chassis_temp, lift_pos);
     counter++;

@@ -2,11 +2,11 @@
 #define ROBOT_H_
 
 #include "main.h"
+#include "piston.h"
 #include "pros/adi.hpp"
 #include "pros/imu.hpp"
 #include "pros/misc.hpp"
 #include "pros/motors.hpp"
-#include "piston.h"
 
 extern pros::Controller controller;
 
@@ -33,7 +33,5 @@ extern pros::ADIDigitalOut clampP;
 extern pros::ADIDigitalOut intakeP;
 extern pros::ADIDigitalOut spikeP;
 extern pros::ADIDigitalOut blankP;
-
-
 
 #endif
