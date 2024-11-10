@@ -176,12 +176,12 @@ void driver()
   }
 
   if (liftmacro){
-    if (lift_pos > 25700 && lift_pos < 27000){
+    if (lift_pos > 25700 && lift_pos < 27500){
       lift.move(0);
       liftmacro = false; 
     }
     else{
-      if (lift_pos > 25700 && !(lift_pos < 27000a)){
+      if (lift_pos > 25700 && !(lift_pos < 27500)){
         lift.move(70);
       }
       else{
