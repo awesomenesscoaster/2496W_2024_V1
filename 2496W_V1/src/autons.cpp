@@ -30,8 +30,60 @@ drive(2000, 2000, 1, 60 );
 void flipout() {}
 
 void rush_blue_left() {
+  intakeP.set_value(true);
+  drive(-1850, 1000);
 
-  // lift.move(40);
+  turn_to(27, 600);
+  drive(-380, 450);
+  delay(300);
+  clampP.set_value(true);
+  delay(150);
+  drive(310, 800);
+  first_stage.move(127);
+  turn_to(-45, 800);
+  intake.move(127);
+  drive(200, 200);
+  delay(300);
+
+  delay(700);
+  intake.move(-127);
+  delay(300);
+  intake.move(127);
+  drive(650, 800);
+  delay(200);
+  turn_to(-200, 800);
+  intake.move(-127);
+  first_stage.move(-127);
+
+  drive(-1300, 1050);
+
+  delay(100);
+  clampP.set_value(false);
+
+  drive(75, 400);
+  turn_to(25, 900);
+  drive(-800, 800);
+  drive(-200, 100, 1, 40);
+  delay(50);
+  clampP.set_value(true);
+  delay(200);
+  drive(150, 200);
+  turn_to(-62, 600);
+  first_stage.move(127);
+  intake.move(127);
+  intakeP.set_value(false);
+  turn_to(-70, 400);
+  drive(1000, 900);
+  intakeP.set_value(true);
+  delay(750);
+  turn_to(-90, 900);
+  drive(-200, 400);
+  delay(200);
+
+  drive(-1200, 2000);
+  turn(135, 900);
+  delay(100);
+  /*// lift.move(40);
   intakeP.set_value(true);
   drive(-1930, 950);
 
@@ -78,7 +130,7 @@ void rush_blue_left() {
 
   turn_to(-148, 900);
   delay(200);
-  drive(500, 2000, 1, 75);
+  drive(500, 2000, 1, 75);*/
   // drive(2000, 5000);
   // delay(1000);
   // drive(400, 5000);
@@ -177,18 +229,20 @@ void rush_red_right() {
 
   // lift.move(40);
   intakeP.set_value(true);
-  drive(-1930, 950);
+  drive(-1850, 1000);
 
-  turn_to(-21, 600);
-  drive(-280, 350);
-  delay(100);
-  clampP.set_value(true);
-  delay(200);
-  drive(310, 800);
-  turn_to(85, 800);
+  turn_to(-27, 600);
+  drive(-369, 450);
   delay(300);
+  clampP.set_value(true);
+  delay(150);
+  drive(310, 800);
   first_stage.move(127);
+  turn_to(45, 800);
   intake.move(127);
+  drive(200, 200);
+  delay(300);
+
   delay(700);
   intake.move(-127);
   delay(300);
@@ -199,30 +253,34 @@ void rush_red_right() {
   intake.move(-127);
   first_stage.move(-127);
 
-  drive(-2000, 1050);
+  drive(-1300, 1050);
 
   delay(100);
   clampP.set_value(false);
 
-  drive(290, 400);
-  turn_to(-17, 900);
-  drive(-760, 800);
+  drive(75, 400);
+  turn_to(-25, 900);
+  drive(-800, 800);
+  drive(-100, 100, 1, 40);
   delay(50);
   clampP.set_value(true);
-  delay(100);
+  delay(200);
+  drive(100, 200);
   turn_to(62, 600);
   first_stage.move(127);
   intake.move(127);
   intakeP.set_value(false);
-  drive(920, 900);
+  turn_to(70, 400);
+  drive(1000, 900);
   intakeP.set_value(true);
   delay(750);
+  turn_to(90, 900);
   drive(-200, 400);
   delay(200);
 
-  turn_to(148, 900);
+  drive(-1200, 2000);
+  turn(-135, 900);
   delay(100);
-  drive(500, 2000, 1, 75);
 
   // turn_to(-30, 450);
   // delay(10);
