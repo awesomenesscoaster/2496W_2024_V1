@@ -18,7 +18,7 @@ using namespace std;
 
 extern std::vector<Auton> autons;
 
-extern void flipout();
+extern void contingency();
 
 extern void rush_blue_left();
 extern void rush_red_right();

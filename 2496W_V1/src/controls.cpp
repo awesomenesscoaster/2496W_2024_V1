@@ -89,7 +89,11 @@ void print_info(int counter, float chassis_temp, int lift_pos)
 }
 void driver()
 {
-
+  static bool liftmacro = false;
+  if (controller.get_digital_new_press(DIGITAL_RIGHT))
+  {
+    liftmacro = !liftmacro; 
+  }
   // ----------- Driver Graph ---------- //
   double lift_pos = rotation.get_position();
   double rPwr, lPwr, rAxis, lAxis, rawLAxis, rawRAxis;
@@ -111,6 +115,10 @@ void driver()
   {
     first_stage.move(-127);
     intake.move(-127);
+  }
+  else if (liftmacro and controller.get_digital(DIGITAL_R1)){
+    first_stage.move(127);
+    intake.move(90);
   }
   else if (controller.get_digital(DIGITAL_R1))
   {
@@ -169,16 +177,11 @@ void driver()
   // {
   //   //lift macro 4 -- move to height where i can put ring on bottom? holder (2nd ring)
   // }
-  static bool liftmacro = false;
-  if (controller.get_digital_new_press(DIGITAL_RIGHT))
-  {
-    liftmacro = !liftmacro; 
-  }
+  
 
   if (liftmacro){
     if (lift_pos > 25700 && lift_pos < 27500){
       lift.move(0);
-      liftmacro = false; 
     }
     else{
       if (lift_pos > 25700 && !(lift_pos < 27500)){
