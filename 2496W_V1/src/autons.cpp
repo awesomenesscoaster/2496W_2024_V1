@@ -466,12 +466,12 @@ void skills() {
 
   // goal 1
   intakeP.set_value(true);
-  drive(300, 400);
-  turn_to(-90, 800);
-  drive(-650, 1000);
+  drive(290, 600);
+  turn_to(-89, 1000);
+  drive(-700, 1000);
   delay(400);
   clampP.set_value(true);
-  drive(-300, 400);
+  drive(-200, 400);
   pros::delay(300);
   turn_to(0, 800);
 
@@ -483,46 +483,46 @@ void skills() {
 
 
   // ring 2
-  drive(825, 800);
+  drive(850, 800, 2);
   pros::delay(1000);
   contingency();
   pros::delay(150);
-  drive(225, 400);
+  drive(240, 400);
   turn_to(90, 800);
   
-  drive(850, 800);
+  drive(1000, 800, 1.75);
   delay(600);
-  drive(150,500);
+  drive(720, 600);
   contingency();
-  turn_to(145, 600);
-  delay(300);
-  drive(700, 800);
-  drive(300, 1500, 1, 70); 
-  delay(1000);
+  turn_to(179, 800);
+  drive(1100, 800);
+  delay(600);
   contingency();
-  delay(500);
-  drive(-850, 1000);
-  turn_to(-179, 800);
+  delay(100);
+  turn_to(160, 800);
+  drive(-1200, 1000);
+  turn_to(-181, 800);
 
-  drive(600, 1000);
+  drive(1100, 1000);
   pros::delay(1000);
   contingency();
-  drive(980, 500);
+  drive(600, 700);
   pros::delay(1000);
   contingency();
-  turn_to(-75, 800);
-  drive(-600, 400);
+  turn_to(-55, 800);
+  drive(-300, 400);
   clampP.set_value(false);
+  drive(-300, 600);
   turn_to(-60, 500);
-  drive(1050, 900);
-  turn_to(89, 900);
+  drive(965, 900);
+  turn_to(90, 900);
   drive(-1500, 1200);
-  turn_to(87, 400);
-  drive(-1050, 1200);
+  turn_to(89.5, 900);
+  drive(-900, 1200);
   delay(200);
   clampP.set_value(true);
   
-  drive(-350, 500);
+  drive(-400, 500);
   turn_to(0, 800);
   intake.move(127);
   delay(400);
