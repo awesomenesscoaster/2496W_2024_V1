@@ -188,13 +188,13 @@ namespace pid{
 
         Timer t2000;
         while (true) {
-            encoder_average = (lb.get_position() + rb.get_position()) / 2;
+            encoder_average = (lb.get_position() + rb.get_position() + lm.get_position() + lf.get_position() + rm.get_position() +rf.get_position()) / 6; // fix this asap
 
             // if (t2000.getTime()>piston_time) pis.set_value(false);
             // else if (t2000.getTime()>(piston_open_time + piston_time)) pis.set_value(true);
 
             heading = imuInit - imu.get_rotation();
-            heading = heading*2;
+            heading = heading * 4;
             
             prev_error = error;
             error = target_dist - encoder_average;
