@@ -194,7 +194,7 @@ namespace pid{
             // else if (t2000.getTime()>(piston_open_time + piston_time)) pis.set_value(true);
 
             heading = imuInit - imu.get_rotation();
-            heading = heading * 4;
+            heading = heading * 7;
             
             prev_error = error;
             error = target_dist - encoder_average;
