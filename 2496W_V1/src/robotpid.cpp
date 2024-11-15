@@ -232,7 +232,7 @@ namespace pid{
             if (count >= 10) {
             break;
             }
-            pros::delay(10);
+            pros::delay(5);
         }
         spin_left(0);
         spin_right(0);
@@ -379,8 +379,8 @@ namespace pid{
            print_info_auton(time, error, speed); 
 
 
-            pros::delay(10);
-            time+= 10;
+            pros::delay(5);
+            time+= 5;
         }
         spin_left(0);
         spin_right(0);

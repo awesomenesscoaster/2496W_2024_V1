@@ -239,53 +239,54 @@ void rush_red_right() {
 
   // lift.move(40);
   intakeP.set_value(true);
-  drive(-1810, 1100);
-  turn_to(-23, 800);
-  drive(-525, 800);
-  delay(300);
+  drive(-1850, 1250, 1.53);
+  turn_to(-25, 900);
+  drive(-200, 150, 1.5);
+  drive(-325, 400, 1, 60);
+  delay(20);
   clampP.set_value(true);
-  delay(150);
-  drive(310, 800);
+  delay(100);
+  drive(310, 900);
   first_stage.move(127);
-  turn_to(45, 800);
+  turn_to(40, 800);
   intake.move(127);
   drive(200, 200);
-  delay(300);
 
-  delay(700);
+  delay(600);
   intake.move(-127);
-  delay(300);
+  delay(200);
   intake.move(127);
-  drive(650, 800);
+  drive(550, 800);
   delay(200);
   turn_to(200, 800);
+  
+
+  drive(-1300, 1050, 2);
   intake.move(-127);
   first_stage.move(-127);
 
-  drive(-1300, 1050);
-
-  delay(100);
+  delay(50);
   clampP.set_value(false);
 
-  drive(75, 400);
-  turn_to(-25, 900);
-  drive(-800, 800);
-  drive(-100, 100, 1, 40);
-  delay(50);
+  drive(10, 100);
+  turn_to(-26, 900);
+  drive(-500, 400);
+  turn_to(-22, 200);
+  drive(-600, 500, 1, 40);
+  delay(20);
   clampP.set_value(true);
-  delay(200);
-  drive(100, 200);
-  turn_to(62, 600);
+  delay(50);
+  drive(50, 50);
+  turn_to(67, 600);
   first_stage.move(127);
   intake.move(127);
   intakeP.set_value(false);
-  turn_to(70, 400);
-  drive(1000, 900);
+  drive(1050, 900, 3);
   intakeP.set_value(true);
-  delay(750);
-  drive(-300, 600);
-  turn_to(160, 600);
-  drive(400, 500);
+  delay(400);
+  drive(-300, 200);
+  turn_to(145, 400);
+  drive(600, 500, 2);
 
   // turn_to(-30, 450);
   // delay(10);

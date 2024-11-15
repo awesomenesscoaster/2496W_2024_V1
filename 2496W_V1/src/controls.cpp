@@ -140,7 +140,10 @@ void driver()
 
   if (controller.get_digital(DIGITAL_L1))
   {
-    if (lift_pos > 17500){
+    if (lift_pos > 16000){
+      if (liftmacro){
+        liftmacro = false;
+      }
       lift.move(127);
     }
     else{
@@ -207,7 +210,7 @@ void driver()
       }
     }
   }*/
-
+ 
 
 
 
