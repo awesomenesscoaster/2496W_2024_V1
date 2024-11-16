@@ -468,14 +468,16 @@ void skills() {
 
   // goal 1
   intakeP.set_value(true);
-  drive(290, 600);
-  turn_to(-89, 1000);
-  drive(-700, 1000);
-  delay(400);
+  drive(390, 1500);
+  turn_to(-90.25, 1000);
+  drive(-300, 500);
+  drive(-280, 500, 1, 70);
+  delay(100);
   clampP.set_value(true);
-  drive(-200, 400);
-  pros::delay(300);
-  turn_to(0, 800);
+
+  drive(-320, 400);
+  pros::delay(100);
+  turn_to(0, 900);
 
   // ring 1
   intake.move(127);
@@ -485,22 +487,83 @@ void skills() {
 
 
   // ring 2
-  drive(850, 800, 2);
+  drive(900, 900);
   pros::delay(1000);
   contingency();
   pros::delay(150);
-  drive(240, 400);
+  drive(190, 400);
   turn_to(90, 800);
   
-  drive(1000, 800, 1.75);
+  drive(750, 800);
   delay(600);
-  drive(720, 600);
+  drive(150, 500);
+ 
   contingency();
-  turn_to(179, 800);
-  drive(1100, 800);
+  turn_to(142, 800);
+  drive(1050, 800);
   delay(600);
   contingency();
-  delay(100);
+  drive(-820, 800);
+  turn_to(180, 500);
+  drive(600, 1000);
+  pros::delay(700);
+  contingency();
+  pros::delay(400);
+  drive(500, 400);
+  delay(600);
+  contingency();
+  turn_to(-68, 800);
+  drive(-350, 500);
+  intake.move(-127);
+  delay(400);
+  clampP.set_value(false);
+  drive(-50, 100);
+  delay(400);
+  
+  drive(1405, 800);
+  delay(400);
+  turn_to(90, 1000);
+  drive(-1600, 2000);
+  turn_to(90, 400);
+  drive(-325, 1000, 1, 70);
+  delay(300);
+  clampP.set_value(true);
+  delay(300);
+  drive(-600, 400);
+  turn_to(0, 800);
+
+  drive(900, 900);
+  pros::delay(1000);
+  contingency();
+  pros::delay(150);
+  drive(190, 400);
+  turn_to(-90, 800);
+  
+  drive(750, 800);
+  delay(600);
+  drive(150, 500);
+ 
+  contingency();
+  turn_to(-142, 800);
+  drive(1050, 800);
+  delay(600);
+  contingency();
+  drive(-820, 800);
+  turn_to(-180, 500);
+  drive(600, 1000);
+  pros::delay(700);
+  contingency();
+  pros::delay(400);
+  drive(500, 400);
+  delay(600);
+  contingency();
+  turn_to(68, 800);
+  drive(-350, 500);
+  intake.move(-127);
+  delay(400);
+  clampP.set_value(false);
+  
+  /*delay(100);
   turn_to(160, 800);
   drive(-1200, 1000);
   turn_to(-181, 800);
@@ -532,7 +595,7 @@ void skills() {
   pros::delay(1000);
   contingency();
   pros::delay(150);
-  drive(225, 400);
+  drive(225, 400);*/
   
 
 }
