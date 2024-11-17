@@ -81,7 +81,6 @@ void rush_blue_left() {
   // intakeP.set_value(true);
   // delay(750);
 
-
   // drive(-500, 500);
 
   intakeP.set_value(true);
@@ -109,7 +108,6 @@ void rush_blue_left() {
   turn_to(-200, 800);
   intake.move(-127);
   first_stage.move(-127);
-  
 
   drive(-1610, 1050, 4);
   intake.move(-127);
@@ -137,7 +135,6 @@ void rush_blue_left() {
   delay(900);
   turn_to(-147, 500);
   drive(350, 500, 2);
-  
 
   // turn_to(-90, 900);
   // drive(-200, 400);
@@ -294,14 +291,14 @@ void rush_red_right() {
   // lift.move(40);
   intakeP.set_value(true);
   drive(-1840, 1250, 1.53);
-  turn_to(-22.8, 900);
-  drive(-200, 150, 1.5);
-  drive(-340, 400, 1, 60);
+  turn_to(-22.8, 500);
+  drive(-200, 100, 1.5);
+  drive(-390, 400, 1.5, 60);
   delay(50);
   clampP.set_value(true);
   delay(100);
   drive(350, 900);
-  turn_to(62, 800);
+  turn_to(64, 800);
   first_stage.move(127);
 
   intake.move(127);
@@ -318,7 +315,6 @@ void rush_red_right() {
   pros::delay(100);
   intake.move(-127);
   first_stage.move(-127);
-  
 
   drive(-1610, 1050, 4);
   intake.move(-127);
@@ -337,15 +333,15 @@ void rush_red_right() {
   clampP.set_value(true);
   delay(50);
   drive(50, 50);
-  turn_to(59, 600);
+  turn_to(61, 600);
   first_stage.move(127);
   intake.move(127);
   intakeP.set_value(false);
-  drive(960, 1200, 3);
+  drive(950, 1200, 3);
   intakeP.set_value(true);
   delay(1000);
-  turn_to(147, 500);
-  drive(350, 500, 2);
+  turn_to(100, 800);
+  drive(-1000, 1000);
 
   // turn_to(-30, 450);
   // delay(10);
@@ -544,7 +540,6 @@ void skills() {
   pros::delay(600);
   contingency();
 
-
   // ring 2
   drive(900, 900);
   pros::delay(1000);
@@ -552,11 +547,11 @@ void skills() {
   pros::delay(150);
   drive(190, 400);
   turn_to(90, 800);
-  
+
   drive(750, 800);
   delay(600);
   drive(150, 500);
- 
+
   contingency();
   turn_to(144, 800);
   drive(1050, 800);
@@ -578,7 +573,7 @@ void skills() {
   clampP.set_value(false);
   drive(-50, 100);
   delay(400);
-  
+
   drive(1575, 800);
   delay(400);
   turn_to(90.75, 1000);
@@ -596,11 +591,11 @@ void skills() {
   pros::delay(150);
   drive(190, 400);
   turn_to(-90, 800);
-  
+
   drive(750, 800);
   delay(600);
   drive(150, 500);
- 
+
   contingency();
   turn_to(-142, 800);
   drive(1100, 800);
@@ -620,7 +615,7 @@ void skills() {
   intake.move(-127);
   delay(400);
   clampP.set_value(false);
-  
+
   /*delay(100);
   turn_to(160, 800);
   drive(-1200, 1000);
@@ -644,7 +639,7 @@ void skills() {
   drive(-900, 1200);
   delay(200);
   clampP.set_value(true);
-  
+
   drive(-400, 500);
   turn_to(0, 800);
   intake.move(127);
@@ -654,8 +649,6 @@ void skills() {
   contingency();
   pros::delay(150);
   drive(225, 400);*/
-  
-
 }
 
 void blank() {}
