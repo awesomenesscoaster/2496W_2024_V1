@@ -59,9 +59,7 @@ void opcontrol() {
   while (true) {
     double chassis_temp =
         (lf.get_temperature() + lm.get_temperature() + lb.get_temperature() +
-         rf.get_temperature() + rm.get_temperature() + rb.get_temperature()) /
-        6;
-
+         rf.get_temperature() + rm.get_temperature() + rb.get_temperature()) / 6;
     int lift_pos = rotation.get_position();
     print_info(counter, chassis_temp, lift_pos);
     counter++;
